@@ -187,11 +187,11 @@
 				TargetAttributes = {
 					8B0E3FFB215D5596000F4BB0 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					8B0E400F215D5598000F4BB0 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						TestTargetID = 8B0E3FFB215D5596000F4BB0;
 					};
 				};
@@ -471,7 +471,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = DM.ISSTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -489,7 +489,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = DM.ISSTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -509,7 +509,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = DM.ISSTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ISSTracker.app/ISSTracker";
 			};
@@ -530,7 +530,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = DM.ISSTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ISSTracker.app/ISSTracker";
 			};
