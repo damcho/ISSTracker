@@ -21,8 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         trackerConnector = ISSTrackerConnector()
-        gameTimer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(updateMap), userInfo: nil, repeats: true)
-        
+        gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(updateMap), userInfo: nil, repeats: true)
     }
     
     override func loadView() {
@@ -42,15 +41,15 @@ class ViewController: UIViewController {
             
             if errorMessage == nil {
 
-                self.line!.add(CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitud))
+                self.line?.add(CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
 
                 let  polygon = GMSPolyline(path: self.line)
                 polygon.strokeColor = .black
                 polygon.strokeWidth = 4
                 polygon.map = self.mapView
 
-                self.marker!.position = CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitud)
-                self.mapView!.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitud))
+                self.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude)
+                self.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
                 
             } else {
                 print(errorMessage!)

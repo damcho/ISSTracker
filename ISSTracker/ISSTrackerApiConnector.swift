@@ -7,56 +7,48 @@
 //
 
 import Foundation
+import Alamofire
 
 
 class ISSTrackerConnector {
     
-    let defaultSession:URLSession
-    var dataTask: URLSessionDataTask?
-    var errorMessage:String?
-    let baseURL = "http://api.open-notify.org/iss-now.json"
-    typealias QueryResut = (ISSTrackerPosition?, String?) -> ()
+    let scheme = "http://"
+    let host = "api.open-notify.org"
+    let path = "/iss-now.json"
 
-    init() {
-        defaultSession = URLSession(configuration: .default)
-    }
-    
+    typealias QueryResut = (ISSTrackerPosition?, String?) -> ()
     
     func getISSPosition( completionHandler: @escaping QueryResut) {
-        
-        if let urlComponents = URLComponents(string: baseURL) {
+        let url = scheme + host + path
+        if let urlComponents = URLComponents(string: url) {
             print(urlComponents)
             guard let url = urlComponents.url else { return }
-            self.requestWeatherData(url: url, completionHandler: completionHandler)
+            self.requestISSPosition(url: url, completionHandler: completionHandler)
         }
     }
     
-    func requestWeatherData(url: URL, completionHandler: @escaping (ISSTrackerPosition?, String?) -> ()){
+    func requestISSPosition(url: URL, completionHandler: @escaping QueryResut){
         
-        dataTask = defaultSession.dataTask(with: url) { data, response, error in
-            defer {
-                self.dataTask = nil
-            }
-            if let error = error {
-                self.errorMessage = "DataTask error: " + error.localizedDescription + "\n"
-                DispatchQueue.main.async {
-                    completionHandler(nil, self.errorMessage)
-                    self.errorMessage = nil
+        Alamofire.request(url, method: .get)
+            .validate()
+            .responseJSON { response in
+                print(response)
+                switch response.result {
+                case .success:
+                    guard let data = response.value as? Dictionary<String , Any> else {
+                        completionHandler(nil,"Malformed data received from fetchAllRooms service")
+                        return
+                    }
+                    let trackerposition = try? ISSTrackerPosition(data: data)
+                    if trackerposition != nil {
+                        completionHandler(trackerposition, nil)
+                    } else {
+                        completionHandler(nil,"Malformed data received from fetchAllRooms service")
+                    }
+                    
+                case .failure:
+                    completionHandler(nil, "Resource not found")
                 }
-            } else if let data = data,
-                let response = response as? HTTPURLResponse,
-                response.statusCode == 200 {
-                let trackerposition = try? ISSTrackerPosition(data: data)
-                let string1 = String(data: data, encoding: String.Encoding.utf8) ?? "Data could not be printed"
-                print(string1)
-                if trackerposition == nil {
-                    self.errorMessage = "error al desencodear data del JSON"
-                }
-                DispatchQueue.main.async {
-                    completionHandler(trackerposition,self.errorMessage )
-                }
-            }
         }
-        dataTask?.resume()
     }
 }

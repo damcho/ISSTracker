@@ -10,40 +10,30 @@ import Foundation
 
 class ISSTrackerPosition {
     
-    
     let latitude:Double
-    let longitud:Double
+    let longitude:Double
     let timestamp:CLongLong
-
     
-    init(data:Data) throws {
-        let trackerDecoder =  try  JSONDecoder().decode(PositionDataDecoder.self, from: data)
-        self.latitude = Double(trackerDecoder.position.latitude)!
-        self.longitud = Double(trackerDecoder.position.longitude)!
-        self.timestamp = trackerDecoder.timeStamp
+    init?(data:Dictionary<String, Any>) throws {
+        
+        guard let position = data["iss_position"] as? Dictionary<String, String> else {
+            return nil
+        }
+        
+        guard let latitude = Double(position["latitude"]!)  else {
+            return nil
+        }
+        self.latitude = latitude
+        
+        guard let longitude = Double(position["longitude"]!)  else {
+            return nil
+        }
+        self.longitude = longitude
+        
+        guard let timestamp = data["timestamp"] as? CLongLong else {
+            return nil
+        }
+        self.timestamp = timestamp
     }
 }
 
-
-private struct PositionDataDecoder : Decodable {
-    
- 
-    let timeStamp:CLongLong
-    let position: Position
-    
-    enum CodingKeys : String, CodingKey {
-        case timestmp = "timestamp"
-        case position = "iss_position"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.timeStamp = try container.decode(CLongLong.self, forKey: .timestmp)
-        self.position = try container.decode(Position.self, forKey: .position)
-    }
-}
-
-private struct Position :Decodable {
-    let latitude:String
-    let longitude:String
-}

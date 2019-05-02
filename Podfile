@@ -6,8 +6,9 @@ target 'ISSTracker' do
   use_frameworks!
 
   # Pods for ISSTracker
-  pod 'GoogleMaps'
-  pod 'GooglePlaces'
+	pod 'GoogleMaps'
+ 	pod 'GooglePlaces'
+	pod 'Alamofire'
 
   target 'ISSTrackerTests' do
     inherit! :search_paths
