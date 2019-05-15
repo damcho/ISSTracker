@@ -9,6 +9,9 @@ target 'ISSTracker' do
 	pod 'GoogleMaps'
  	pod 'GooglePlaces'
 	pod 'Alamofire'
+    pod 'MaterialComponents/Buttons'
+    pod 'NVActivityIndicatorView'
+    pod 'Eureka'
 
   target 'ISSTrackerTests' do
     inherit! :search_paths

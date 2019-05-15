@@ -16,6 +16,9 @@
 		8B0E4015215D5598000F4BB0 /* ISSTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E4014215D5598000F4BB0 /* ISSTrackerTests.swift */; };
 		8B424074215D5B0200E6A5F7 /* ISSTrackerApiConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B424073215D5B0200E6A5F7 /* ISSTrackerApiConnector.swift */; };
 		8B424076215D5B2100E6A5F7 /* iSSTrackerPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */; };
+		8B771378228C8922003712A4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B771377228C8922003712A4 /* SettingsViewController.swift */; };
+		8B9A355C228C9D7500740C0F /* settingsObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A355B228C9D7500740C0F /* settingsObject.swift */; };
+		8B9A355F228C9DE800740C0F /* ISSTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A355E228C9DE800740C0F /* ISSTrackerViewModel.swift */; };
 		B2C7E51F16E38D48110753DA /* Pods_ISSTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A308C96A367B37A1D3E74BF3 /* Pods_ISSTrackerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +46,9 @@
 		8B0E4016215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B424073215D5B0200E6A5F7 /* ISSTrackerApiConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSTrackerApiConnector.swift; sourceTree = "<group>"; };
 		8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iSSTrackerPosition.swift; sourceTree = "<group>"; };
+		8B771377228C8922003712A4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8B9A355B228C9D7500740C0F /* settingsObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsObject.swift; sourceTree = "<group>"; };
+		8B9A355E228C9DE800740C0F /* ISSTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSTrackerViewModel.swift; sourceTree = "<group>"; };
 		97920EC0C4D7076A04A7F475 /* Pods-ISSTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ISSTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-ISSTracker/Pods-ISSTracker.release.xcconfig"; sourceTree = "<group>"; };
 		A308C96A367B37A1D3E74BF3 /* Pods_ISSTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ISSTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A63963419BA78050835CC7CB /* Pods-ISSTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ISSTrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ISSTrackerTests/Pods-ISSTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -102,10 +108,11 @@
 		8B0E3FFE215D5596000F4BB0 /* ISSTracker */ = {
 			isa = PBXGroup;
 			children = (
-				8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */,
+				8B9A355D228C9DC800740C0F /* viewModel */,
+				8B9A355A228C9D4E00740C0F /* model */,
+				8B771376228C88FB003712A4 /* viewControllers */,
 				8B424073215D5B0200E6A5F7 /* ISSTrackerApiConnector.swift */,
 				8B0E3FFF215D5596000F4BB0 /* AppDelegate.swift */,
-				8B0E4001215D5596000F4BB0 /* ViewController.swift */,
 				8B0E4003215D5596000F4BB0 /* Main.storyboard */,
 				8B0E4006215D5598000F4BB0 /* Assets.xcassets */,
 				8B0E4008215D5598000F4BB0 /* LaunchScreen.storyboard */,
@@ -121,6 +128,32 @@
 				8B0E4016215D5598000F4BB0 /* Info.plist */,
 			);
 			path = ISSTrackerTests;
+			sourceTree = "<group>";
+		};
+		8B771376228C88FB003712A4 /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8B0E4001215D5596000F4BB0 /* ViewController.swift */,
+				8B771377228C8922003712A4 /* SettingsViewController.swift */,
+			);
+			path = viewControllers;
+			sourceTree = "<group>";
+		};
+		8B9A355A228C9D4E00740C0F /* model */ = {
+			isa = PBXGroup;
+			children = (
+				8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */,
+				8B9A355B228C9D7500740C0F /* settingsObject.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		8B9A355D228C9DC800740C0F /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8B9A355E228C9DE800740C0F /* ISSTrackerViewModel.swift */,
+			);
+			path = viewModel;
 			sourceTree = "<group>";
 		};
 		AFA0F33750C6E0CA15EDA8C9 /* Pods */ = {
@@ -303,12 +336,22 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ISSTracker/Pods-ISSTracker-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -325,7 +368,10 @@
 				8B424074215D5B0200E6A5F7 /* ISSTrackerApiConnector.swift in Sources */,
 				8B0E4002215D5596000F4BB0 /* ViewController.swift in Sources */,
 				8B0E4000215D5596000F4BB0 /* AppDelegate.swift in Sources */,
+				8B771378228C8922003712A4 /* SettingsViewController.swift in Sources */,
+				8B9A355F228C9DE800740C0F /* ISSTrackerViewModel.swift in Sources */,
 				8B424076215D5B2100E6A5F7 /* iSSTrackerPosition.swift in Sources */,
+				8B9A355C228C9D7500740C0F /* settingsObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

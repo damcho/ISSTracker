@@ -16,7 +16,7 @@ class ISSTrackerConnector {
     let host = "api.open-notify.org"
     let path = "/iss-now.json"
 
-    typealias QueryResut = (ISSTrackerPosition?, String?) -> ()
+    typealias QueryResut = (ISSTrackerPosition?, Error?) -> ()
     
     func getISSPosition( completionHandler: @escaping QueryResut) {
         let url = scheme + host + path
@@ -36,18 +36,18 @@ class ISSTrackerConnector {
                 switch response.result {
                 case .success:
                     guard let data = response.value as? Dictionary<String , Any> else {
-                        completionHandler(nil,"Malformed data received from fetchAllRooms service")
+                        completionHandler(nil, NSError(domain: "error", code: 1, userInfo: [ NSLocalizedDescriptionKey: "Malformed data received from fetchAllRooms service"]))
                         return
                     }
                     let trackerposition = try? ISSTrackerPosition(data: data)
                     if trackerposition != nil {
                         completionHandler(trackerposition, nil)
                     } else {
-                        completionHandler(nil,"Malformed data received from fetchAllRooms service")
+                        completionHandler(nil,NSError(domain: "error", code: 1, userInfo: [ NSLocalizedDescriptionKey: "Malformed data received from fetchAllRooms service"]))
                     }
                     
                 case .failure:
-                    completionHandler(nil, "Resource not found")
+                    completionHandler(nil, NSError(domain: "error", code: 1, userInfo: [ NSLocalizedDescriptionKey: "Malformed data received from fetchAllRooms service"]))
                 }
         }
     }

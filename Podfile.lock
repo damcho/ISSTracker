@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
+  - Eureka (5.0.0)
   - GoogleMaps (2.7.0):
     - GoogleMaps/Maps (= 2.7.0)
   - GoogleMaps/Base (2.7.0)
@@ -7,23 +8,68 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (2.7.0):
     - GoogleMaps/Base (= 2.7.0)
+  - MaterialComponents/AnimationTiming (83.0.1)
+  - MaterialComponents/Buttons (83.0.1):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Shapes
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Ink (83.0.1):
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (83.0.1)
+  - MaterialComponents/private/Math (83.0.1)
+  - MaterialComponents/Ripple (83.0.1):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Math
+  - MaterialComponents/ShadowElevations (83.0.1)
+  - MaterialComponents/ShadowLayer (83.0.1):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/Shapes (83.0.1):
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/Typography (83.0.1):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+  - MDFInternationalization (2.0.0)
+  - MDFTextAccessibility (2.0.0)
+  - NVActivityIndicatorView (4.7.0):
+    - NVActivityIndicatorView/Presenter (= 4.7.0)
+  - NVActivityIndicatorView/Presenter (4.7.0)
 
 DEPENDENCIES:
   - Alamofire
+  - Eureka
   - GoogleMaps
   - GooglePlaces
+  - MaterialComponents/Buttons
+  - NVActivityIndicatorView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Eureka
     - GoogleMaps
     - GooglePlaces
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
+    - NVActivityIndicatorView
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Eureka: 0f64f477ec8ef6201c6fec143d60ff5c201cf654
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
+  MaterialComponents: 2363f5dab79a96d3958e6aaf49ec116e102d23dc
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
+  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
 
-PODFILE CHECKSUM: 16a7509157936117ae1597fe2b5424a5065e4084
+PODFILE CHECKSUM: 5a173ba94bcc565f2f488e6f1bdea586d782e42f
 
 COCOAPODS: 1.5.3
