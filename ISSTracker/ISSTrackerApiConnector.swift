@@ -21,7 +21,6 @@ class ISSTrackerConnector {
     func getISSPosition( completionHandler: @escaping QueryResut) {
         let url = scheme + host + path
         if let urlComponents = URLComponents(string: url) {
-            print(urlComponents)
             guard let url = urlComponents.url else { return }
             self.requestISSPosition(url: url, completionHandler: completionHandler)
         }
@@ -32,7 +31,6 @@ class ISSTrackerConnector {
         Alamofire.request(url, method: .get)
             .validate()
             .responseJSON { response in
-                print(response)
                 switch response.result {
                 case .success:
                     guard let data = response.value as? Dictionary<String , Any> else {

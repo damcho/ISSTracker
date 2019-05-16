@@ -10,17 +10,20 @@ import UIKit
 import Eureka
 
 class SettingsViewController: FormViewController {
-
+    
+    var ISStrackerVM:ISSTrackerViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.title = "Settings"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped))
-
+        
         self.createForm()
     }
     
     @objc func doneTapped() {
+        ISStrackerVM?.updateSettings(values:form.values())
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -32,14 +35,12 @@ class SettingsViewController: FormViewController {
         return Section("ISS Position update time interval")
             <<< self.createTimerSelection()
     }
-
-    func createTimerSelection() -> IntRow{
-        return  IntRow("IntRow"){ row in
-            row.title = "Seconds"
-            row.value = 10
-           
-            }
-    }
     
-
+    func createTimerSelection() -> IntRow{
+        return  IntRow("timer"){ row in
+            row.title = "Seconds"
+            row.value = Int( (self.ISStrackerVM?.settingsObject.timeInterval) ?? 10)
+            row.add(rule: RuleRequired())
+        }
+    }
 }

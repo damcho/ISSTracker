@@ -11,7 +11,7 @@ import GoogleMaps
 import MaterialComponents
 import NVActivityIndicatorView
 
-class ViewController: UIViewController {
+class ISSTrackerViewController: UIViewController {
     
     var mapView:GMSMapView?
     var line:GMSMutablePath?
@@ -80,9 +80,7 @@ class ViewController: UIViewController {
     
     override func loadView() {
         let camera = GMSCameraPosition.camera(withLatitude: 44.7991, longitude: 52.2692, zoom: 3.0)
-        
         self.mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        self.mapView?.camera = camera
         self.line = GMSMutablePath()
         self.marker = GMSMarker()
         self.marker!.map = self.mapView
@@ -92,6 +90,7 @@ class ViewController: UIViewController {
     
     @objc func settingsButtonTapped(floatingButton:MDCFloatingButton){
         let settingsController = SettingsViewController()
+        settingsController.ISStrackerVM = self.ISSViewModel
         let navBarOnModal: UINavigationController = UINavigationController(rootViewController: settingsController)
         
         settingsController.modalPresentationStyle = .overFullScreen
