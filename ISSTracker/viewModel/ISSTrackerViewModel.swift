@@ -18,17 +18,21 @@ class ISSTrackerViewModel {
     var intervalTimer: Timer?
 
     init() {
-        self.startTimer()
+        self.startTasks()
+
     }
     
-    func startTimer() {
+    func stopTasks() {
+        self.intervalTimer?.invalidate()
+    }
+    
+    func startTasks() {
         intervalTimer = Timer.scheduledTimer(timeInterval: settingsObject.timeInterval, target: self, selector: #selector(updateISSPosition), userInfo: nil, repeats: true)
     }
     
     func updateSettings(values:[String:Any?]) {
         self.settingsObject.timeInterval = Double(values["timer"] as! Int)
-        self.intervalTimer?.invalidate()
-        self.startTimer()
+        self.startTasks()
     }
     
     @objc func updateISSPosition() {

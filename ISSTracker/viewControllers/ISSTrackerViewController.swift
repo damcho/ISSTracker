@@ -24,34 +24,51 @@ class ISSTrackerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupListeners()
+        self.setupCallbacks()
         self.loadSettingsButton()
+        self.addObservers()
     }
     
-    func setupListeners() {
+    func addObservers() {
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] (notification) in
+            self?.ISSViewModel.stopTasks()
+        }
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] (notification) in
+            self?.resetMap()
+            self?.ISSViewModel.startTasks()
+        }
+    }
+    
+    func resetMap() {
+        self.line?.removeAllCoordinates()
+        self.mapView?.clear()
+        self.marker?.map = self.mapView
+    }
+    
+    func setupCallbacks() {
         activityIndicatorView.startAnimating(activityData, NVActivityIndicatorView.DEFAULT_FADE_IN_ANIMATION)
 
-        self.ISSViewModel.onFetchPositionSuccess = {[unowned self] (ISSPosition:ISSTrackerPosition?) -> () in
+        self.ISSViewModel.onFetchPositionSuccess = {[weak self] (ISSPosition:ISSTrackerPosition?) -> () in
             
-            self.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
+            self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
             
-                self.line?.add(CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
+                self?.line?.add(CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
                 
-                let  polygon = GMSPolyline(path: self.line)
+                let  polygon = GMSPolyline(path: self?.line)
                 polygon.strokeColor = .black
                 polygon.strokeWidth = 4
-                polygon.map = self.mapView
+                polygon.map = self?.mapView
                 
-                self.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude)
-                self.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
+                self?.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude)
+                self?.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
         }
         
-        self.ISSViewModel.onFetchPositionError =  {[unowned self] (error:Error) -> () in
-            self.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
+        self.ISSViewModel.onFetchPositionError =  {[weak self] (error:Error) -> () in
+            self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
 
             let alert = UIAlertController(title: "Alert", message: error.localizedDescription ,preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            self?.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -83,7 +100,7 @@ class ISSTrackerViewController: UIViewController {
         self.mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         self.line = GMSMutablePath()
         self.marker = GMSMarker()
-        self.marker!.map = self.mapView
+        self.marker?.map = self.mapView
         
         self.view = mapView
     }

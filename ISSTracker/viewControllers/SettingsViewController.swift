@@ -15,10 +15,9 @@ class SettingsViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Settings"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped))
-        
+        self.ISStrackerVM?.stopTasks()
         self.createForm()
     }
     
