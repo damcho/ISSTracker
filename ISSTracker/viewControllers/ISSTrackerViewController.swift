@@ -42,6 +42,11 @@ class ISSTrackerViewController: UIViewController {
     func resetMap() {
         self.line?.removeAllCoordinates()
         self.mapView?.clear()
+        let issImage = UIImage(named: "issImage")!
+        let iconImageView = UIImageView(image: issImage)
+        iconImageView.contentMode = .scaleAspectFit
+        iconImageView.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
+        self.marker?.iconView = iconImageView
         self.marker?.map = self.mapView
     }
     
@@ -56,7 +61,7 @@ class ISSTrackerViewController: UIViewController {
                 
                 let  polygon = GMSPolyline(path: self?.line)
                 polygon.strokeColor = .black
-                polygon.strokeWidth = 4
+                polygon.strokeWidth = 2
                 polygon.map = self?.mapView
                 
                 self?.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude)
