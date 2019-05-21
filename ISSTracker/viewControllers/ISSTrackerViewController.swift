@@ -52,25 +52,25 @@ class ISSTrackerViewController: UIViewController {
     
     func setupCallbacks() {
         activityIndicatorView.startAnimating(activityData, NVActivityIndicatorView.DEFAULT_FADE_IN_ANIMATION)
-
+        
         self.ISSViewModel.onFetchPositionSuccess = {[weak self] (ISSPosition:ISSTrackerPosition?) -> () in
             
             self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
             
-                self?.line?.add(CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
-                
-                let  polygon = GMSPolyline(path: self?.line)
-                polygon.strokeColor = .black
-                polygon.strokeWidth = 2
-                polygon.map = self?.mapView
-                
-                self?.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude)
-                self?.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
+            self?.line?.add(CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
+            
+            let  polygon = GMSPolyline(path: self?.line)
+            polygon.strokeColor = .black
+            polygon.strokeWidth = 2
+            polygon.map = self?.mapView
+            
+            self?.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude)
+            self?.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
         }
         
         self.ISSViewModel.onFetchPositionError =  {[weak self] (error:Error) -> () in
             self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
-
+            
             let alert = UIAlertController(title: "Alert", message: error.localizedDescription ,preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self?.present(alert, animated: true, completion: nil)
