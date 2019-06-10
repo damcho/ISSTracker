@@ -14,9 +14,9 @@ import NVActivityIndicatorView
 class ISSTrackerViewController: UIViewController {
     
     var mapView:GMSMapView?
-    var line:GMSMutablePath?
+    var lineCoordinates:GMSMutablePath?
     var marker:GMSMarker?
-    
+    let LOCATION_POINTS_COUNT:UInt = 3
     let ISSViewModel = ISSTrackerViewModel()
     
     let activityData = ActivityData(message:"Updating position...")
@@ -40,13 +40,8 @@ class ISSTrackerViewController: UIViewController {
     }
     
     func resetMap() {
-        self.line?.removeAllCoordinates()
+        self.lineCoordinates?.removeAllCoordinates()
         self.mapView?.clear()
-        let issImage = UIImage(named: "issImage")!
-        let iconImageView = UIImageView(image: issImage)
-        iconImageView.contentMode = .scaleAspectFit
-        iconImageView.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
-        self.marker?.iconView = iconImageView
         self.marker?.map = self.mapView
     }
     
@@ -57,9 +52,11 @@ class ISSTrackerViewController: UIViewController {
             
             self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
             
-            self?.line?.add(CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
-            
-            let  polygon = GMSPolyline(path: self?.line)
+            self?.lineCoordinates?.add(CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
+            if self?.lineCoordinates?.count() ?? 0 >= self!.LOCATION_POINTS_COUNT {
+                self?.lineCoordinates?.removeCoordinate(at: 0)
+            }
+            let  polygon = GMSPolyline(path: self?.lineCoordinates)
             polygon.strokeColor = .black
             polygon.strokeWidth = 2
             polygon.map = self?.mapView
@@ -103,11 +100,19 @@ class ISSTrackerViewController: UIViewController {
     override func loadView() {
         let camera = GMSCameraPosition.camera(withLatitude: 44.7991, longitude: 52.2692, zoom: 3.0)
         self.mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        self.line = GMSMutablePath()
+        self.lineCoordinates = GMSMutablePath()
         self.marker = GMSMarker()
         self.marker?.map = self.mapView
-        
+        self.marker?.iconView = self.loadMarkerImage()
         self.view = mapView
+    }
+    
+    private func loadMarkerImage() -> UIImageView{
+        let issImage = UIImage(named: "issImage")!
+        let iconImageView = UIImageView(image: issImage)
+        iconImageView.contentMode = .scaleAspectFit
+        iconImageView.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
+        return iconImageView
     }
     
     @objc func settingsButtonTapped(floatingButton:MDCFloatingButton){
