@@ -1,15 +1,16 @@
 PODS:
-  - Alamofire (4.8.2)
-  - Eureka (5.0.0)
-  - GoogleMaps (2.7.0):
-    - GoogleMaps/Maps (= 2.7.0)
-  - GoogleMaps/Base (2.7.0)
-  - GoogleMaps/Maps (2.7.0):
+  - Alamofire (4.9.1)
+  - Eureka (5.1.0)
+  - GoogleMaps (3.6.0):
+    - GoogleMaps/Maps (= 3.6.0)
+  - GoogleMaps/Base (3.6.0)
+  - GoogleMaps/Maps (3.6.0):
     - GoogleMaps/Base
-  - GooglePlaces (2.7.0):
-    - GoogleMaps/Base (= 2.7.0)
-  - MaterialComponents/AnimationTiming (83.0.1)
-  - MaterialComponents/Buttons (83.0.1):
+  - GooglePlaces (3.6.0):
+    - GoogleMaps/Base (= 3.6.0)
+  - MaterialComponents/AnimationTiming (94.4.0)
+  - MaterialComponents/Buttons (94.4.0):
+    - MaterialComponents/Elevation
     - MaterialComponents/Ink
     - MaterialComponents/private/Math
     - MaterialComponents/Ripple
@@ -19,27 +20,34 @@ PODS:
     - MaterialComponents/Typography
     - MDFInternationalization
     - MDFTextAccessibility
-  - MaterialComponents/Ink (83.0.1):
+  - MaterialComponents/Elevation (94.4.0):
+    - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/private/Application (83.0.1)
-  - MaterialComponents/private/Math (83.0.1)
-  - MaterialComponents/Ripple (83.0.1):
+  - MaterialComponents/Ink (94.4.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (94.4.0)
+  - MaterialComponents/private/Color (94.4.0)
+  - MaterialComponents/private/Math (94.4.0)
+  - MaterialComponents/Ripple (94.4.0):
     - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/ShadowElevations (83.0.1)
-  - MaterialComponents/ShadowLayer (83.0.1):
+  - MaterialComponents/ShadowElevations (94.4.0)
+  - MaterialComponents/ShadowLayer (94.4.0):
     - MaterialComponents/ShadowElevations
-  - MaterialComponents/Shapes (83.0.1):
+  - MaterialComponents/Shapes (94.4.0):
+    - MaterialComponents/private/Color
     - MaterialComponents/private/Math
     - MaterialComponents/ShadowLayer
-  - MaterialComponents/Typography (83.0.1):
+  - MaterialComponents/Typography (94.4.0):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
   - MDFInternationalization (2.0.0)
   - MDFTextAccessibility (2.0.0)
-  - NVActivityIndicatorView (4.7.0):
-    - NVActivityIndicatorView/Presenter (= 4.7.0)
-  - NVActivityIndicatorView/Presenter (4.7.0)
+  - NVActivityIndicatorView (4.8.0):
+    - NVActivityIndicatorView/Presenter (= 4.8.0)
+  - NVActivityIndicatorView/Presenter (4.8.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -50,7 +58,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - Eureka
     - GoogleMaps
@@ -61,15 +69,15 @@ SPEC REPOS:
     - NVActivityIndicatorView
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  Eureka: 0f64f477ec8ef6201c6fec143d60ff5c201cf654
-  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
-  GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
-  MaterialComponents: 2363f5dab79a96d3958e6aaf49ec116e102d23dc
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Eureka: 18a5076dcf0c41f9cd9748aa1c42f4d11434bdae
+  GoogleMaps: 82f8fe307193bb4de6ef6bf9e88f1d624b718f9d
+  GooglePlaces: 1b9d29cf3e164903d873600f511f42acdfe85294
+  MaterialComponents: 3ee5327e02dc3f34df48c68205b5fd7dce171744
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
-  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
+  NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
 
 PODFILE CHECKSUM: 5a173ba94bcc565f2f488e6f1bdea586d782e42f
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4
