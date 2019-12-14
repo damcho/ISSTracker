@@ -52,7 +52,7 @@ class ISSTrackerViewController: UIViewController {
             
             self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
             
-            self?.lineCoordinates?.add(CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
+            self?.lineCoordinates?.add(CLLocationCoordinate2D(latitude: ISSPosition!.coordinate.latitude, longitude: ISSPosition!.coordinate.longitude))
             if self?.lineCoordinates?.count() ?? 0 >= self!.LOCATION_POINTS_COUNT {
                 self?.lineCoordinates?.removeCoordinate(at: 0)
             }
@@ -61,8 +61,8 @@ class ISSTrackerViewController: UIViewController {
             polygon.strokeWidth = 2
             polygon.map = self?.mapView
             
-            self?.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude)
-            self?.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition!.latitude, longitude: ISSPosition!.longitude))
+            self?.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition!.coordinate.latitude, longitude: ISSPosition!.coordinate.longitude)
+            self?.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition!.coordinate.latitude, longitude: ISSPosition!.coordinate.longitude))
         }
         
         self.ISSViewModel.onFetchPositionError =  {[weak self] (error:Error) -> () in
