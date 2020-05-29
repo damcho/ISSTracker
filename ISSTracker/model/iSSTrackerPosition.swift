@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ISSTrackerPosition: Codable {
+public struct ISSTrackerPosition: Codable {
     
     let timestamp: CLongLong
     let coordinate: Coordinate
@@ -18,7 +18,7 @@ struct ISSTrackerPosition: Codable {
         case timestamp = "timestamp"
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         timestamp = try container.decode(CLongLong.self, forKey: .timestamp)
         coordinate = try container.decode(Coordinate.self, forKey: .coordinate)

@@ -10,6 +10,39 @@ import Foundation
 import Alamofire
 
 
+public enum ISSTrackerPositionLoaderResult {
+    case sccess(ISSTrackerPosition)
+    case error(ISSTrackerLoaderError)
+}
+
+public typealias QueryResut = (ISSTrackerPositionLoaderResult) -> ()
+
+public enum ISSTrackerLoaderError: Error {
+    case Connectivity
+}
+
+public class ISSTrackerPositionLoader {
+    
+    let httpClient: HTTPClient
+    let url: URL
+    public init(client: HTTPClient, url: URL) {
+        self.httpClient = client
+        self.url = url
+    }
+    
+    public func loadISSPosition( completionHandler: @escaping QueryResut) {
+        httpClient.getData(from: self.url, completionHandler: { (error) in
+            completionHandler(.error(.Connectivity))
+        })
+    }
+
+}
+
+public protocol HTTPClient {
+    func getData(from url: URL, completionHandler: @escaping (Error) -> Void)
+}
+
+
 class ISSTrackerConnector {
     
     let scheme = "http://"

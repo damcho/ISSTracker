@@ -9,52 +9,42 @@
 import XCTest
 import ISSTracker
 
-enum ISSTrackerPositionLoaderResult {
-    case sccess(ISSTrackerPosition)
-    case error(Error)
-}
-
-typealias QueryResut = (ISSTrackerPositionLoaderResult) -> ()
-
-struct ISSTrackerPosition {}
-
-class ISSTrackerPositionLoader {
-    
-    let httpClient: HTTPClient
-    let url: URL
-    init(client: HTTPClient, url: URL) {
-        self.httpClient = client
-        self.url = url
-    }
-    
-    func loadISSPosition( completionHandler: @escaping QueryResut) {
-        httpClient.getData(from: url)
-    }
-
-}
-
-protocol HTTPClient {
-    func getData(from: URL)
-}
-
-
 class ISSTrackerPositionLoaderTests: XCTestCase {
 
-    func test_ISSTrackerPositionLoaderInitDoesNotLoadData() {
+    func test_ISSTrackerPosition_LoaderInitDoesNotLoadData() {
         let (sut, client) = makeSUT()
 
-        XCTAssert(client.requestUrl == nil)
+        XCTAssert(client.requestUrls.isEmpty)
     }
     
-    func test_ISSTrackerPositionLoadsCorrectURL() {
+    func test_ISSTrackerPosition_LoadsTwiceIfInvokedTwice() {
         let url = URL(string: "http://www.some.com")!
         let (sut, client) = makeSUT(url: url)
         sut.loadISSPosition (completionHandler: { (ISSTrackerPositionLoaderResult) in
-            
         })
-        
-        XCTAssertEqual(client.requestUrl, url)
+        sut.loadISSPosition (completionHandler: { (ISSTrackerPositionLoaderResult) in
+        })
+        XCTAssertEqual(client.requestUrls, [url, url])
     }
+    
+    func test_ISSTrackerPosition_DeliversErrorOnHTTPClientError() {
+        let (sut, client) = makeSUT()
+        var capturedErrors = [ISSTrackerLoaderError]()
+        sut.loadISSPosition (completionHandler: { (result) in
+            switch result {
+            case .error(let error):
+                capturedErrors.append(error)
+            default:
+                XCTFail("expected error and got data instead")
+            }
+        })
+        let clientError = NSError(domain: "error 400", code: 1)
+        client.completions[0](clientError)
+        
+        XCTAssertEqual(capturedErrors, [ISSTrackerLoaderError.Connectivity])
+        
+    }
+    
     
     //Helpers
     
@@ -65,10 +55,12 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
     }
     
     private class HTTPClientSpy: HTTPClient {
-        var requestUrl: URL?
-
-        func getData(from url: URL) {
-            requestUrl = url
+        var requestUrls: [URL] = []
+        var completions: [(Error) -> Void] = []
+        
+        func getData(from url: URL, completionHandler: @escaping (Error) -> Void) {
+            requestUrls.append(url)
+            completions.append(completionHandler)
         }
     }
     
