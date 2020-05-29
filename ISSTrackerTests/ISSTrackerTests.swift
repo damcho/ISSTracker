@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ISSTracker
+import ISSTracker
 
 class ISSTrackerTests: XCTestCase {
     
