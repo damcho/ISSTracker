@@ -19,6 +19,7 @@ public typealias QueryResut = (ISSTrackerPositionLoaderResult) -> ()
 
 public enum ISSTrackerLoaderError: Error {
     case Connectivity
+    case InvalidData
 }
 
 public class ISSTrackerPositionLoader {
@@ -31,15 +32,24 @@ public class ISSTrackerPositionLoader {
     }
     
     public func loadISSPosition( completionHandler: @escaping QueryResut) {
-        httpClient.getData(from: self.url, completionHandler: { (error) in
-            completionHandler(.error(.Connectivity))
+        httpClient.getData(from: self.url, completionHandler: { (result) in
+            switch result {
+            case .success(let httpResponse):
+                completionHandler(.error(.InvalidData))
+            case .error(let error):
+                completionHandler(.error(.Connectivity))
+            }
         })
     }
 
 }
 
+public enum HTTPClientResult {
+     case success(HTTPURLResponse)
+     case error(Error)
+ }
 public protocol HTTPClient {
-    func getData(from url: URL, completionHandler: @escaping (Error) -> Void)
+    func getData(from url: URL, completionHandler: @escaping (HTTPClientResult) -> Void)
 }
 
 
