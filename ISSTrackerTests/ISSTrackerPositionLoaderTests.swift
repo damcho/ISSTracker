@@ -99,15 +99,13 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
         client.completeWithStatusCode(200, data: invalidJSON)
         
         XCTAssertEqual(capturedErrors, [.InvalidData])
-
     }
-    
     
     //Helpers
     
     private func makeSUT(url: URL = URL(string: "http://www.anyURL.com")!) -> (ISSTrackerPositionLoader, HTTPClientSpy) {
         let client = HTTPClientSpy()
-        let sut = ISSTrackerPositionLoader(client: client, url: url)
+        let sut = RemoteISSTrackerPositionLoader(client: client, url: url)
         return (sut, client)
     }
     
