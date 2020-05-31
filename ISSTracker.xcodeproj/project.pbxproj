@@ -13,7 +13,6 @@
 		8B0E4005215D5596000F4BB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4003215D5596000F4BB0 /* Main.storyboard */; };
 		8B0E4007215D5598000F4BB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4006215D5598000F4BB0 /* Assets.xcassets */; };
 		8B0E400A215D5598000F4BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4008215D5598000F4BB0 /* LaunchScreen.storyboard */; };
-		8B0E4015215D5598000F4BB0 /* ISSTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E4014215D5598000F4BB0 /* ISSTrackerTests.swift */; };
 		8B2A9C7822AED24900690354 /* LoctionNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2A9C7722AED24900690354 /* LoctionNotificationsManager.swift */; };
 		8B2A9C7A22AED6F800690354 /* LocationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2A9C7922AED6F800690354 /* LocationManagerProtocol.swift */; };
 		8B2A9C7C22AEDF6800690354 /* LocationNotificationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2A9C7B22AEDF6800690354 /* LocationNotificationInfo.swift */; };
@@ -47,7 +46,6 @@
 		8B0E4009215D5598000F4BB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B0E400B215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B0E4010215D5598000F4BB0 /* ISSTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ISSTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B0E4014215D5598000F4BB0 /* ISSTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSTrackerTests.swift; sourceTree = "<group>"; };
 		8B0E4016215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B2A9C7722AED24900690354 /* LoctionNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoctionNotificationsManager.swift; sourceTree = "<group>"; };
 		8B2A9C7922AED6F800690354 /* LocationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerProtocol.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 		8B0E4013215D5598000F4BB0 /* ISSTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				8B0E4014215D5598000F4BB0 /* ISSTrackerTests.swift */,
 				8B0E4016215D5598000F4BB0 /* Info.plist */,
 				8B8A90F024810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift */,
 			);
@@ -389,7 +386,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B8A90F124810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift in Sources */,
-				8B0E4015215D5598000F4BB0 /* ISSTrackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

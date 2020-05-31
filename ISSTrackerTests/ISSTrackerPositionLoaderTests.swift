@@ -65,28 +65,23 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
     
     func test_ISSTrackerPositionLoader_deliversISSPosition_OnValidData() {
         let (sut, client) = makeSUT()
-        let aCoordinate = Coordinate(latitude: 139.1422, longitude: 139.1422)
-        let aTimestamp: Double = 1590923338
-        let ISSposition = ISSTrackerPosition(coordinate: aCoordinate, timestamp: aTimestamp)
-        let ISSCoordinate = ["longitude": "139.1422", "latitude": "139.1422"]
-        let ISSPositinJSON = ["iss_position": ISSCoordinate, "timestamp": 1590923338] as [String : Any]
-        let jsonData = try! JSONSerialization.data(withJSONObject: ISSPositinJSON)
+        let (model, data) = makeISSPosition(latitude: 139.1422, longitude: 46.1235, timestamp: 1590926552)
         
         sut.loadISSPosition (completionHandler: { (result) in
             switch result {
             case .success(let position):
-                XCTAssertEqual(position, ISSposition)
+                XCTAssertEqual(position, model)
             case .error:
                 XCTFail("expected success and got error instead")
             }
         })
-        client.completeWithStatusCode(200, data: jsonData)
+        client.completeWithStatusCode(200, data: data)
     }
     
     func test_ISSTrackerPositionLoader_deliversInvalidDataError_onInvalidJSON() {
         let (sut, client) = makeSUT()
         var capturedErrors = [ISSTrackerLoaderError]()
-
+        
         sut.loadISSPosition (completionHandler: { (result) in
             switch result {
             case .success:
@@ -107,6 +102,17 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
         let client = HTTPClientSpy()
         let sut = RemoteISSTrackerPositionLoader(client: client, url: url)
         return (sut, client)
+    }
+    
+    func makeISSPosition(latitude: Double, longitude: Double, timestamp: TimeInterval) -> (model: ISSTrackerPosition, jsonData: Data) {
+        let aCoordinate = Coordinate(latitude: latitude, longitude: longitude)
+        let ISSposition = ISSTrackerPosition(coordinate: aCoordinate, timestamp: timestamp)
+        
+        let ISSCoordinate = ["longitude": "\(longitude)", "latitude": "\(latitude)"]
+        let ISSPositinJSON = ["iss_position": ISSCoordinate, "timestamp": timestamp] as [String : Any]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: ISSPositinJSON)
+        return (ISSposition, jsonData)
     }
     
     private class HTTPClientSpy: HTTPClient {
