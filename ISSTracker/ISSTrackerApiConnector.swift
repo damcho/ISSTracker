@@ -11,7 +11,7 @@ import Alamofire
 
 
 public enum ISSTrackerPositionLoaderResult {
-    case sccess(ISSTrackerPosition)
+    case success(ISSTrackerPosition)
     case error(ISSTrackerLoaderError)
 }
 
@@ -34,9 +34,15 @@ public class ISSTrackerPositionLoader {
     public func loadISSPosition( completionHandler: @escaping QueryResut) {
         httpClient.getData(from: self.url, completionHandler: { (result) in
             switch result {
-            case .success(let httpResponse):
-                completionHandler(.error(.InvalidData))
-            case .error(let error):
+            case .success(let httpResponse, let data):
+                guard httpResponse.statusCode == 200,
+                    let codableISSPosition = try? JSONDecoder().decode(ISSTrackerPositionCodable.self, from: data) else {
+                    completionHandler(.error(.InvalidData))
+                    return
+                }
+                let issTrackerPosition = codableISSPosition.issPosition
+                completionHandler(.success(issTrackerPosition))                
+            case .error:
                 completionHandler(.error(.Connectivity))
             }
         })
@@ -45,12 +51,37 @@ public class ISSTrackerPositionLoader {
 }
 
 public enum HTTPClientResult {
-     case success(HTTPURLResponse)
+     case success(HTTPURLResponse, Data)
      case error(Error)
  }
 public protocol HTTPClient {
     func getData(from url: URL, completionHandler: @escaping (HTTPClientResult) -> Void)
 }
+
+struct ISSTrackerPositionCodable: Codable {
+    
+    private let timestamp: CLongLong
+    let codableCoordinate: CoordinateCodable
+    
+    enum CodingKeys: String, CodingKey {
+        case codableCoordinate = "iss_position"
+        case timestamp = "timestamp"
+    }
+    
+    var issPosition: ISSTrackerPosition {
+        return ISSTrackerPosition(coordinate: codableCoordinate.coordinate, timestamp: TimeInterval(timestamp))
+    }
+}
+
+struct CoordinateCodable :Codable {
+    let latitude:String
+    let longitude:String
+    
+    var coordinate: Coordinate {
+        return Coordinate(latitude: Double(string:latitude) ?? 0, longitude: Double(string:longitude) ?? 0)
+    }
+}
+
 
 
 class ISSTrackerConnector {
@@ -59,7 +90,7 @@ class ISSTrackerConnector {
     let host = "api.open-notify.org"
     let path = "/iss-now.json"
     
-    typealias QueryResut = (ISSTrackerPosition?, Error?) -> ()
+    typealias QueryResut = (ISSTrackerPositionCodable?, Error?) -> ()
     
     func getISSPosition( completionHandler: @escaping QueryResut) {
         let url = scheme + host + path
@@ -79,7 +110,7 @@ class ISSTrackerConnector {
                     if let jsonData = response.data {
                         let decoder = JSONDecoder()
                         do {
-                            let position = try decoder.decode(ISSTrackerPosition.self, from: jsonData)
+                            let position = try decoder.decode(ISSTrackerPositionCodable.self, from: jsonData)
                             completionHandler(position, nil)
                         } catch {
                             completionHandler(nil,error)

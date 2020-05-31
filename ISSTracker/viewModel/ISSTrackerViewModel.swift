@@ -14,7 +14,7 @@ class ISSTrackerViewModel: NSObject, LocationNotificationSchedulerDelegate {
     private let locationManager = LocationNotificationsManager()
     let settingsObject = SettingsObject()
     var onFetchPositionError:((Error) -> ())?
-    var onFetchPositionSuccess:((ISSTrackerPosition) -> ())?
+    var onFetchPositionSuccess:((ISSTrackerPositionCodable) -> ())?
     var intervalTimer: Timer?
 
     override init() {
@@ -54,7 +54,7 @@ class ISSTrackerViewModel: NSObject, LocationNotificationSchedulerDelegate {
     }
     
     @objc func updateISSPosition() {
-        let completionHandler = {[unowned self] (ISSPosition:ISSTrackerPosition?, error:Error?) -> () in
+        let completionHandler = {[unowned self] (ISSPosition:ISSTrackerPositionCodable?, error:Error?) -> () in
             guard let ISSPosition = ISSPosition else {
                 self.onFetchPositionError?(error!)
                 return

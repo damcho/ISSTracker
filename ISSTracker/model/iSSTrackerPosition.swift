@@ -8,31 +8,24 @@
 
 import Foundation
 
-public struct ISSTrackerPosition: Codable {
-    
-    let timestamp: CLongLong
+public struct ISSTrackerPosition: Equatable {
+
     let coordinate: Coordinate
+    let timestamp: TimeInterval
     
-    enum CodingKeys: String, CodingKey {
-        case coordinate = "iss_position"
-        case timestamp = "timestamp"
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        timestamp = try container.decode(CLongLong.self, forKey: .timestamp)
-        coordinate = try container.decode(Coordinate.self, forKey: .coordinate)
+    public init(coordinate: Coordinate, timestamp: TimeInterval) {
+        self.coordinate = coordinate
+        self.timestamp = timestamp
     }
 }
 
-struct Coordinate :Codable {
+public struct Coordinate: Equatable{
     let latitude:Double
     let longitude:Double
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        latitude = Double(string: try container.decode(String.self, forKey: .latitude)) ?? 0.0
-        longitude = Double(string: try container.decode(String.self, forKey: .longitude)) ?? 0.0
+    public init(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }
 

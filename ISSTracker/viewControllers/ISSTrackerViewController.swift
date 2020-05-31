@@ -48,11 +48,11 @@ class ISSTrackerViewController: UIViewController {
     func setupCallbacks() {
         activityIndicatorView.startAnimating(activityData, NVActivityIndicatorView.DEFAULT_FADE_IN_ANIMATION)
         
-        self.ISSViewModel.onFetchPositionSuccess = {[weak self] (ISSPosition:ISSTrackerPosition?) -> () in
+        self.ISSViewModel.onFetchPositionSuccess = {[weak self] (ISSPosition:ISSTrackerPositionCodable?) -> () in
             
             self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
             
-            self?.lineCoordinates?.add(CLLocationCoordinate2D(latitude: ISSPosition!.coordinate.latitude, longitude: ISSPosition!.coordinate.longitude))
+            self?.lineCoordinates?.add(CLLocationCoordinate2D(latitude: Double(string: ISSPosition!.codableCoordinate.latitude) ?? 0, longitude: Double(string: ISSPosition!.codableCoordinate.longitude) ?? 0))
             if self?.lineCoordinates?.count() ?? 0 >= self!.LOCATION_POINTS_COUNT {
                 self?.lineCoordinates?.removeCoordinate(at: 0)
             }
@@ -61,8 +61,8 @@ class ISSTrackerViewController: UIViewController {
             polygon.strokeWidth = 2
             polygon.map = self?.mapView
             
-            self?.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition!.coordinate.latitude, longitude: ISSPosition!.coordinate.longitude)
-            self?.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition!.coordinate.latitude, longitude: ISSPosition!.coordinate.longitude))
+            self?.marker?.position = CLLocationCoordinate2D(latitude:  Double(string: ISSPosition!.codableCoordinate.latitude) ?? 0, longitude:  Double(string: ISSPosition!.codableCoordinate.longitude) ?? 0)
+            self?.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude:  Double(string: ISSPosition!.codableCoordinate.latitude) ?? 0, longitude:  Double(string: ISSPosition!.codableCoordinate.longitude) ?? 0))
         }
         
         self.ISSViewModel.onFetchPositionError =  {[weak self] (error:Error) -> () in
