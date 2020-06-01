@@ -8,23 +8,23 @@
 
 import Foundation
 
+public protocol ISSTrackerPositionLoader {
+    func loadISSPosition( completionHandler: @escaping QueryResut)
+}
+
 public enum ISSTrackerPositionLoaderResult: Equatable {
     case success(ISSTrackerPosition)
     case error(ISSTrackerLoaderError)
 }
-
-public typealias QueryResut = (ISSTrackerPositionLoaderResult) -> ()
 
 public enum ISSTrackerLoaderError: Error {
     case Connectivity
     case InvalidData
 }
 
-public protocol ISSTrackerPositionLoader {
-    func loadISSPosition( completionHandler: @escaping QueryResut)
-}
+public typealias QueryResut = (ISSTrackerPositionLoaderResult) -> ()
 
-struct ISSTrackerPositionCodable: Codable {
+private struct ISSTrackerPositionCodable: Codable {
     
     let timestamp: CLongLong
     let codableCoordinate: CoordinateCodable
@@ -39,7 +39,7 @@ struct ISSTrackerPositionCodable: Codable {
     }
 }
 
-struct CoordinateCodable :Codable {
+private struct CoordinateCodable :Codable {
     let latitude:String
     let longitude:String
     
@@ -76,7 +76,3 @@ extension RemoteISSTrackerPositionLoader: ISSTrackerPositionLoader {
         })
     }
 }
-    
-
-
-

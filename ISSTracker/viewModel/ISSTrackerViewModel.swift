@@ -10,14 +10,15 @@ import UserNotifications
 
 class ISSTrackerViewModel: NSObject, LocationNotificationSchedulerDelegate {
     
-    private let trackerConnector: RemoteISSTrackerPositionLoader = RemoteISSTrackerPositionLoader(client: AlamoFireHTTPClient(), url: URL(string: "http://api.open-notify.org/iss-now.json")!)
+    private var issTrackerLoader: ISSTrackerPositionLoader
     private let locationManager = LocationNotificationsManager()
     let settingsObject = SettingsObject()
     var onFetchPositionError:((Error) -> ())?
     var onFetchPositionSuccess:((ISSTrackerPosition) -> ())?
     var intervalTimer: Timer?
 
-    override init() {
+    init(loader: ISSTrackerPositionLoader) {
+        self.issTrackerLoader = loader
         super.init()
         self.startTasks()
         self.locationManager.delegate = self
@@ -61,6 +62,6 @@ class ISSTrackerViewModel: NSObject, LocationNotificationSchedulerDelegate {
             case .error(let error):
                 self.onFetchPositionError?(error)
             }}
-        trackerConnector.loadISSPosition(completionHandler: completionHandler)
+        issTrackerLoader.loadISSPosition(completionHandler: completionHandler)
     }
 }
