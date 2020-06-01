@@ -20,83 +20,59 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
     func test_ISSTrackerPositionLoader_LoadsTwiceIfInvokedTwice() {
         let url = URL(string: "http://www.some.com")!
         let (sut, client) = makeSUT(url: url)
-        sut.loadISSPosition (completionHandler: { (ISSTrackerPositionLoaderResult) in
-        })
-        sut.loadISSPosition (completionHandler: { (ISSTrackerPositionLoaderResult) in
-        })
+        sut.loadISSPosition (completionHandler: { (ISSTrackerPositionLoaderResult) in })
+        sut.loadISSPosition (completionHandler: { (ISSTrackerPositionLoaderResult) in })
         XCTAssertEqual(client.requestUrls, [url, url])
     }
     
     func test_ISSTrackerPositionLoader_DeliversErrorOnHTTPClientError() {
         let (sut, client) = makeSUT()
-        var capturedErrors = [ISSTrackerLoaderError]()
-        sut.loadISSPosition (completionHandler: { (result) in
-            switch result {
-            case .error(let error):
-                capturedErrors.append(error)
-            default:
-                XCTFail("expected error and got data instead")
-            }
+        
+        expect(sut, tocompletewith: .error(.Connectivity), when: {
+            let clientError = NSError(domain: "error 400", code: 1)
+            client.completeWith(clientError)
         })
-        let clientError = NSError(domain: "error 400", code: 1)
-        client.completeWith(clientError)
-        
-        XCTAssertEqual(capturedErrors, [.Connectivity])
-        
     }
     
     func test_ISSTrackerPositionLoader_DeliversInvalidDataError() {
         let (sut, client) = makeSUT()
-        var capturedErrors = [ISSTrackerLoaderError]()
-        
-        sut.loadISSPosition (completionHandler: { (result) in
-            switch result {
-            case .error(let error):
-                capturedErrors.append(error)
-            default:
-                XCTFail("expected error and got data instead")
-            }
-        })
         let anyData = Data()
-        client.completeWithStatusCode(400, data: anyData)
         
-        XCTAssertEqual(capturedErrors, [.InvalidData])
+        expect(sut, tocompletewith: .error(.InvalidData), when: {
+            client.completeWithStatusCode(400, data: anyData)
+        })
     }
     
     func test_ISSTrackerPositionLoader_deliversISSPosition_OnValidData() {
         let (sut, client) = makeSUT()
         let (model, data) = makeISSPosition(latitude: 139.1422, longitude: 46.1235, timestamp: 1590926552)
         
-        sut.loadISSPosition (completionHandler: { (result) in
-            switch result {
-            case .success(let position):
-                XCTAssertEqual(position, model)
-            case .error:
-                XCTFail("expected success and got error instead")
-            }
+        expect(sut, tocompletewith: .success(model), when: {
+            client.completeWithStatusCode(200, data: data)
         })
-        client.completeWithStatusCode(200, data: data)
     }
     
     func test_ISSTrackerPositionLoader_deliversInvalidDataError_onInvalidJSON() {
         let (sut, client) = makeSUT()
-        var capturedErrors = [ISSTrackerLoaderError]()
         
-        sut.loadISSPosition (completionHandler: { (result) in
-            switch result {
-            case .success:
-                XCTFail("expected success and got error instead")
-            case .error( let error):
-                capturedErrors.append(error)
-            }
+        expect(sut, tocompletewith: .error(.InvalidData), when: {
+            let invalidJSON = Data("invalid json".utf8)
+            client.completeWithStatusCode(200, data: invalidJSON)
         })
-        let invalidJSON = Data("invalid json".utf8)
-        client.completeWithStatusCode(200, data: invalidJSON)
-        
-        XCTAssertEqual(capturedErrors, [.InvalidData])
     }
     
     //Helpers
+    
+    private func expect(_ loader:ISSTrackerPositionLoader, tocompletewith result: ISSTrackerPositionLoaderResult, when action: () -> Void) {
+        var capturedResult: ISSTrackerPositionLoaderResult?
+        loader.loadISSPosition (completionHandler: { (result) in
+            capturedResult = result
+        })
+        
+        action()
+        
+        XCTAssertEqual(result, capturedResult)
+    }
     
     private func makeSUT(url: URL = URL(string: "http://www.anyURL.com")!) -> (ISSTrackerPositionLoader, HTTPClientSpy) {
         let client = HTTPClientSpy()

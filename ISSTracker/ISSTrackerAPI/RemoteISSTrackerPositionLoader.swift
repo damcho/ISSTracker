@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum ISSTrackerPositionLoaderResult {
+public enum ISSTrackerPositionLoaderResult: Equatable {
     case success(ISSTrackerPosition)
     case error(ISSTrackerLoaderError)
 }
