@@ -76,7 +76,4 @@ final class AlamoFireHTTPClient: HTTPClient {
                 }
         }
     }
-    
-    
-    
 }

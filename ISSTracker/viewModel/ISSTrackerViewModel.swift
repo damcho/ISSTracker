@@ -10,11 +10,11 @@ import UserNotifications
 
 class ISSTrackerViewModel: NSObject, LocationNotificationSchedulerDelegate {
     
-    private let trackerConnector = ISSTrackerConnector()
+    private let trackerConnector: RemoteISSTrackerPositionLoader = RemoteISSTrackerPositionLoader(client: AlamoFireHTTPClient(), url: URL(string: "http://api.open-notify.org/iss-now.json")!)
     private let locationManager = LocationNotificationsManager()
     let settingsObject = SettingsObject()
     var onFetchPositionError:((Error) -> ())?
-    var onFetchPositionSuccess:((ISSTrackerPositionCodable) -> ())?
+    var onFetchPositionSuccess:((ISSTrackerPosition) -> ())?
     var intervalTimer: Timer?
 
     override init() {
@@ -54,13 +54,13 @@ class ISSTrackerViewModel: NSObject, LocationNotificationSchedulerDelegate {
     }
     
     @objc func updateISSPosition() {
-        let completionHandler = {[unowned self] (ISSPosition:ISSTrackerPositionCodable?, error:Error?) -> () in
-            guard let ISSPosition = ISSPosition else {
-                self.onFetchPositionError?(error!)
-                return
-            }
-            self.onFetchPositionSuccess?(ISSPosition)
-        }
-        trackerConnector.getISSPosition( completionHandler: completionHandler)
+        let completionHandler = {[unowned self] (result: ISSTrackerPositionLoaderResult) -> () in
+            switch result {
+            case .success(let issPosition):
+                self.onFetchPositionSuccess?(issPosition)
+            case .error(let error):
+                self.onFetchPositionError?(error)
+            }}
+        trackerConnector.loadISSPosition(completionHandler: completionHandler)
     }
 }
