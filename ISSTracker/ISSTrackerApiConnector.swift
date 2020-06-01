@@ -10,9 +10,9 @@ import Foundation
 import Alamofire
 
 public enum HTTPClientResult {
-     case success(HTTPURLResponse, Data)
-     case error(Error)
- }
+    case success(HTTPURLResponse, Data)
+    case error(Error)
+}
 public protocol HTTPClient {
     func getData(from url: URL, completionHandler: @escaping (HTTPClientResult) -> Void)
 }
@@ -56,4 +56,27 @@ class ISSTrackerConnector {
                 }
         }
     }
+}
+
+final class AlamoFireHTTPClient: HTTPClient {
+    func getData(from url: URL, completionHandler: @escaping (HTTPClientResult) -> Void) {
+        Alamofire.request(url, method: .get)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let HTTPResponse = response.response, let data = response.data {
+                        completionHandler(.success(HTTPResponse, data))
+                    } else {
+                        let error = NSError(domain: "unknown error", code: 1)
+                        completionHandler(.error(error))
+                    }
+                case .failure( let error):
+                    completionHandler(.error(error))
+                }
+        }
+    }
+    
+    
+    
 }

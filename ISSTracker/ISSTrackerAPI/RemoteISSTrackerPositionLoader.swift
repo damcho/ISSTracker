@@ -48,7 +48,7 @@ struct CoordinateCodable :Codable {
     }
 }
 
-public class RemoteISSTrackerPositionLoader {
+public final class RemoteISSTrackerPositionLoader {
     
     let httpClient: HTTPClient
     let url: URL

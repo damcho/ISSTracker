@@ -12,7 +12,7 @@ import ISSTracker
 class ISSTrackerPositionLoaderTests: XCTestCase {
     
     func test_ISSTrackerPositionLoader_LoaderInitDoesNotLoadData() {
-        let (sut, client) = makeSUT()
+        let (_ , client) = makeSUT()
         
         XCTAssert(client.requestUrls.isEmpty)
     }
@@ -29,7 +29,7 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
         
         expect(sut, tocompletewith: .error(.Connectivity), when: {
-            let clientError = NSError(domain: "error 400", code: 1)
+            let clientError = NSError(domain: "Connection error", code: 1)
             client.completeWith(clientError)
         })
     }
@@ -110,8 +110,4 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
             messages[index].completion(.success(httpResponse, data))
         }
     }
-    
-    
-    
-    
 }
