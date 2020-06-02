@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias QueryResut = (ISSTrackerPositionLoaderResult) -> ()
+
 public protocol ISSTrackerPositionLoader {
     func loadISSPosition( completionHandler: @escaping QueryResut)
 }
@@ -22,33 +24,32 @@ public enum ISSTrackerLoaderError: Error {
     case InvalidData
 }
 
-public typealias QueryResut = (ISSTrackerPositionLoaderResult) -> ()
-
-private struct ISSTrackerPositionCodable: Codable {
-    
-    let timestamp: CLongLong
-    let codableCoordinate: CoordinateCodable
-    
-    enum CodingKeys: String, CodingKey {
-        case codableCoordinate = "iss_position"
-        case timestamp = "timestamp"
-    }
-    
-    var issPosition: ISSTrackerPosition {
-        return ISSTrackerPosition(coordinate: codableCoordinate.coordinate, timestamp: TimeInterval(timestamp))
-    }
-}
-
-private struct CoordinateCodable :Codable {
-    let latitude:String
-    let longitude:String
-    
-    var coordinate: Coordinate {
-        return Coordinate(latitude: Double(string:latitude) ?? 0, longitude: Double(string:longitude) ?? 0)
-    }
-}
 
 public final class RemoteISSTrackerPositionLoader {
+    
+    private struct ISSTrackerPositionCodable: Codable {
+        
+        let timestamp: CLongLong
+        let codableCoordinate: CoordinateCodable
+        
+        enum CodingKeys: String, CodingKey {
+            case codableCoordinate = "iss_position"
+            case timestamp = "timestamp"
+        }
+        
+        var issPosition: ISSTrackerPosition {
+            return ISSTrackerPosition(coordinate: codableCoordinate.coordinate, timestamp: TimeInterval(timestamp))
+        }
+    }
+
+    private struct CoordinateCodable :Codable {
+        let latitude:String
+        let longitude:String
+        
+        var coordinate: Coordinate {
+            return Coordinate(latitude: Double(string:latitude) ?? 0, longitude: Double(string:longitude) ?? 0)
+        }
+    }
     
     let httpClient: HTTPClient
     let url: URL

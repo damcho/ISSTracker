@@ -63,15 +63,19 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
     
     //Helpers
     
-    private func expect(_ loader:ISSTrackerPositionLoader, tocompletewith result: ISSTrackerPositionLoaderResult, when action: () -> Void) {
+    private func expect(_ loader:ISSTrackerPositionLoader, tocompletewith result: ISSTrackerPositionLoaderResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        // Arrange
         var capturedResult: ISSTrackerPositionLoaderResult?
+        
+        // Act
         loader.loadISSPosition (completionHandler: { (result) in
             capturedResult = result
         })
         
         action()
         
-        XCTAssertEqual(result, capturedResult)
+        // Assert
+        XCTAssertEqual(result, capturedResult, file: file, line: line)
     }
     
     private func makeSUT(url: URL = URL(string: "http://www.anyURL.com")!) -> (ISSTrackerPositionLoader, HTTPClientSpy) {
@@ -80,7 +84,7 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
         return (sut, client)
     }
     
-    func makeISSPosition(latitude: Double, longitude: Double, timestamp: TimeInterval) -> (model: ISSTrackerPosition, jsonData: Data) {
+    private func makeISSPosition(latitude: Double, longitude: Double, timestamp: TimeInterval) -> (model: ISSTrackerPosition, jsonData: Data) {
         let aCoordinate = Coordinate(latitude: latitude, longitude: longitude)
         let ISSposition = ISSTrackerPosition(coordinate: aCoordinate, timestamp: timestamp)
         
