@@ -61,26 +61,44 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
         })
     }
     
+    func test_ISSTrackerPositionLoader_doesNotComplete_if_deallocated() {
+        let client = HTTPClientSpy()
+        var sut: RemoteISSTrackerPositionLoader? = RemoteISSTrackerPositionLoader(client: client, url: URL(string: "http://www.some.com")!)
+        let (_, data) = makeISSPosition(latitude: 139.1422, longitude: 46.1235, timestamp: 1590926552)
+        var capturedResults = [ISSTrackerPositionLoaderResult]()
+        sut?.loadISSPosition { result in
+            capturedResults.append(result)
+        }
+        
+        sut = nil
+        client.completeWithStatusCode(200, data: data)
+        XCTAssertEqual([], capturedResults)
+
+    }
+    
     //Helpers
     
-    private func expect(_ loader:ISSTrackerPositionLoader, tocompletewith result: ISSTrackerPositionLoaderResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+    private func expect(_ loader:ISSTrackerPositionLoader, tocompletewith result: ISSTrackerPositionLoaderResult?, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         // Arrange
-        var capturedResult: ISSTrackerPositionLoaderResult?
+        var capturedResults = [ISSTrackerPositionLoaderResult]()
         
         // Act
         loader.loadISSPosition (completionHandler: { (result) in
-            capturedResult = result
+            capturedResults.append(result)
         })
         
         action()
         
         // Assert
-        XCTAssertEqual(result, capturedResult, file: file, line: line)
+        XCTAssertEqual([result], capturedResults, file: file, line: line)
     }
     
-    private func makeSUT(url: URL = URL(string: "http://www.anyURL.com")!) -> (ISSTrackerPositionLoader, HTTPClientSpy) {
+    private func makeSUT(url: URL = URL(string: "http://www.anyURL.com")!, file: StaticString = #file, line: UInt = #line) -> (ISSTrackerPositionLoader, HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteISSTrackerPositionLoader(client: client, url: url)
+        addTeardownBlock {[weak sut] in
+            XCTAssertNil(sut, file: file, line: line)
+        }
         return (sut, client)
     }
     

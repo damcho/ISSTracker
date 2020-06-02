@@ -61,7 +61,9 @@ public final class RemoteISSTrackerPositionLoader {
 
 extension RemoteISSTrackerPositionLoader: ISSTrackerPositionLoader {
     public func loadISSPosition( completionHandler: @escaping QueryResut) {
-        httpClient.getData(from: self.url, completionHandler: { (result) in
+        httpClient.getData(from: self.url, completionHandler: { [weak self] (result) in
+            guard self != nil else { return }
+            
             switch result {
             case .success(let httpResponse, let data):
                 guard httpResponse.statusCode == 200,
