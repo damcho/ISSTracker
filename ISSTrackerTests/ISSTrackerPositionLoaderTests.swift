@@ -73,7 +73,6 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
         sut = nil
         client.completeWithStatusCode(200, data: data)
         XCTAssertEqual([], capturedResults)
-
     }
     
     //Helpers
@@ -96,10 +95,15 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
     private func makeSUT(url: URL = URL(string: "http://www.anyURL.com")!, file: StaticString = #file, line: UInt = #line) -> (ISSTrackerPositionLoader, HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteISSTrackerPositionLoader(client: client, url: url)
-        addTeardownBlock {[weak sut] in
-            XCTAssertNil(sut, file: file, line: line)
-        }
+        trackForMemoryLeaks(instance: sut)
+        trackForMemoryLeaks(instance: client)
         return (sut, client)
+    }
+    
+    private func trackForMemoryLeaks(instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
+        addTeardownBlock {[weak instance] in
+            XCTAssertNil(instance, file: file, line: line)
+        }
     }
     
     private func makeISSPosition(latitude: Double, longitude: Double, timestamp: TimeInterval) -> (model: ISSTrackerPosition, jsonData: Data) {
