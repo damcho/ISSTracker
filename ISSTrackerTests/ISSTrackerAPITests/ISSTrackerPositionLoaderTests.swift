@@ -79,7 +79,7 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
     
     private func expect(_ loader:ISSTrackerPositionLoader, tocompletewith expectedResult: ISSTrackerPositionLoaderResult?, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
             
-        let exp = expectation(description: "desc")
+        let exp = expectation(description: "expect to fulfill load completion with expected result")
         
         loader.loadISSPosition (completionHandler: { (result) in
             switch (expectedResult, result){
