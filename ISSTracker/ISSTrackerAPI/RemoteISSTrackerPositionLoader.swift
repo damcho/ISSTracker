@@ -14,7 +14,7 @@ public protocol ISSTrackerPositionLoader {
     func loadISSPosition( completionHandler: @escaping QueryResut)
 }
 
-public enum ISSTrackerPositionLoaderResult: Equatable {
+public enum ISSTrackerPositionLoaderResult {
     case success(ISSTrackerPosition)
     case error(ISSTrackerLoaderError)
 }

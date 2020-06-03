@@ -72,24 +72,31 @@ class ISSTrackerPositionLoaderTests: XCTestCase {
         
         sut = nil
         client.completeWithStatusCode(200, data: data)
-        XCTAssertEqual([], capturedResults)
+        XCTAssertTrue(capturedResults.isEmpty)
     }
     
     //Helpers
     
-    private func expect(_ loader:ISSTrackerPositionLoader, tocompletewith result: ISSTrackerPositionLoaderResult?, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        // Arrange
-        var capturedResults = [ISSTrackerPositionLoaderResult]()
+    private func expect(_ loader:ISSTrackerPositionLoader, tocompletewith expectedResult: ISSTrackerPositionLoaderResult?, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+            
+        let exp = expectation(description: "desc")
         
-        // Act
         loader.loadISSPosition (completionHandler: { (result) in
-            capturedResults.append(result)
+            switch (expectedResult, result){
+            
+            case (.success(let expectedPosition), .success(let positionReceived)):
+                XCTAssertEqual(expectedPosition, positionReceived, file: file, line: line)
+            case (.error(let expectedError), .error(let receivedError)):
+                XCTAssertEqual(expectedError, receivedError, file: file, line: line)
+            default:
+                XCTFail()
+            }
+            exp.fulfill()
         })
         
         action()
         
-        // Assert
-        XCTAssertEqual([result], capturedResults, file: file, line: line)
+        wait(for: [exp], timeout: 1.0)
     }
     
     private func makeSUT(url: URL = URL(string: "http://www.anyURL.com")!, file: StaticString = #file, line: UInt = #line) -> (ISSTrackerPositionLoader, HTTPClientSpy) {
