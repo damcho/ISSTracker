@@ -10,10 +10,14 @@ import XCTest
 import ISSTracker
 import Alamofire
 
+struct UnexpectedValuesRepresentation: Error {}
+
+
 final class AFHTTPClient :HTTPClient {
     
     private let sessionManager: SessionManager
     
+
     init(configuration: URLSessionConfiguration = .default) {
         self.sessionManager = Alamofire.SessionManager(configuration: configuration)
     }
@@ -27,9 +31,12 @@ final class AFHTTPClient :HTTPClient {
                 case .failure(let error):
                     completionHandler(.error(error))
                 case .success:
-                    if let HTTPResponse = response.response, let data = response.data {
-                        completionHandler(.success(HTTPResponse, data))
+                    guard let HTTPResponse = response.response, let data = response.data else {
+                        completionHandler(.error(UnexpectedValuesRepresentation()))
+                        return
                     }
+                    completionHandler(.success(HTTPResponse, data))
+
                 }
         }
     }
@@ -39,26 +46,54 @@ final class AFHTTPClient :HTTPClient {
 class HTTPClientTests: XCTestCase {
     
     override func setUp() {
+        super.setUp()
         HTTPClientStub.resetStubs()
     }
     
     override class func tearDown() {
         URLProtocol.unregisterClass(HTTPClientStub.self)
+        super.tearDown()
     }
     
     func test_httpclient_delivers_errorOnhttpError() {
         let sut = makeSUT()
+        let aURL = anyURL()
+        let stubError = anyError()
+        
+        expect(sut, toCompleteWith: .error(stubError), onRequest: aURL, when: {
+            HTTPClientStub.stub(aURL, with: nil, response: nil, error: stubError)
+        })
+    }
+    
+    func test_httpclient_delivers_dataOn200Response() {
+        let sut = makeSUT()
+        let url = anyURL()
+        let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        let data = someData()
+        expect(sut, toCompleteWith: .success(response, data), onRequest: url, when: {
+            HTTPClientStub.stub(url, with: data, response: response, error: nil)
+        })
+    }
+    
+ 
+    
+    // Helpers
+    
+    private func expect(_ sut: HTTPClient, toCompleteWith expectedResult: HTTPClientResult, onRequest url: URL, when stub: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        
+        let expect = expectation(description: "expect delivers data on 200 response")
+        
+        stub()
+        
+        sut.getData(from: url) { (result) in
+            switch (result, expectedResult) {
+            case (.error(let receivedError), .error( let expectedError)):
+                XCTAssertEqual((receivedError as NSError).code, (expectedError as NSError).code, file: file, line: line)
+                XCTAssertEqual((receivedError as NSError).localizedDescription, (expectedError as NSError).localizedDescription ,file: file, line: line)
 
-        let aURL = URL(string: "https://www.apple.com")!
-        let stubError = NSError(domain: "some error", code: 1)
-        
-        let expect = expectation(description: "error")
-        
-        HTTPClientStub.stub(aURL, with: nil, response: nil, error: stubError)
-        sut.getData(from: aURL) { (result) in
-            switch result {
-            case .error(let receivedError):
-                XCTAssertEqual(receivedError.localizedDescription, stubError.localizedDescription)
+            case (.success(let receivedResponse, let receivedData), .success( let expectedResponse, let expectedData)):
+                XCTAssertEqual(receivedResponse.statusCode, expectedResponse.statusCode, file: file, line: line)
+                XCTAssertEqual(receivedData, expectedData, file: file, line: line)
             default:
                 XCTFail()
             }
@@ -68,30 +103,18 @@ class HTTPClientTests: XCTestCase {
         wait(for: [expect], timeout: 1.0)
     }
     
-    func test_httpclient_delivers_dataOn200Response() {
-        let sut = makeSUT()
-        let aURL = URL(string: "https://www.apple.com")!
-        let somedata = Data("{}".utf8)
-        let expect = expectation(description: "error")
-        let response = HTTPURLResponse(url: aURL, statusCode: 200, httpVersion: nil, headerFields: nil)
-        
-        HTTPClientStub.stub(aURL, with: somedata, response: response, error: nil)
-        
-        sut.getData(from: aURL) { (result) in
-            switch result {
-            case .error:
-                XCTFail()
-            case .success(let receivedResponse, let receivedData):
-                XCTAssertEqual(response?.statusCode, receivedResponse.statusCode)
-                XCTAssertEqual(somedata, receivedData)
-            }
-            expect.fulfill()
-        }
-        
-        wait(for: [expect], timeout: 1.0)
+    private func someData() -> Data {
+        return Data("{}".utf8)
     }
     
-    // Helpers
+    private func anyURL() -> URL {
+        return URL(string: "https://www.any-url.com")!
+    }
+    
+    private func anyError() -> NSError {
+        return NSError(domain: "some error", code: 1)
+    }
+    
     private func makeSUT() -> HTTPClient {
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses?.insert(HTTPClientStub.self, at: 0)
@@ -99,16 +122,11 @@ class HTTPClientTests: XCTestCase {
     }
 }
 
-
-
-
 private struct Stub{
     let data: Data?
     let response: HTTPURLResponse?
     let error: Error?
 }
-
-
 
 private class HTTPClientStub: URLProtocol {
     
