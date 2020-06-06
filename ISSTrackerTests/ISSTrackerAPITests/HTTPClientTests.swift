@@ -8,40 +8,6 @@
 
 import XCTest
 import ISSTracker
-import Alamofire
-
-struct UnexpectedValuesRepresentation: Error {}
-
-
-final class AFHTTPClient :HTTPClient {
-    
-    private let sessionManager: SessionManager
-    
-
-    init(configuration: URLSessionConfiguration = .default) {
-        self.sessionManager = Alamofire.SessionManager(configuration: configuration)
-    }
-    
-    func getData(from url: URL, completionHandler: @escaping (HTTPClientResult) -> Void) {
-        
-        self.sessionManager.request(url, method: .get)
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .failure(let error):
-                    completionHandler(.error(error))
-                case .success:
-                    guard let HTTPResponse = response.response, let data = response.data else {
-                        completionHandler(.error(UnexpectedValuesRepresentation()))
-                        return
-                    }
-                    completionHandler(.success(HTTPResponse, data))
-
-                }
-        }
-    }
-}
-
 
 class HTTPClientTests: XCTestCase {
     
@@ -70,15 +36,13 @@ class HTTPClientTests: XCTestCase {
         let url = anyURL()
         let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let data = someData()
+        
         expect(sut, toCompleteWith: .success(response, data), onRequest: url, when: {
             HTTPClientStub.stub(url, with: data, response: response, error: nil)
         })
     }
     
- 
-    
     // Helpers
-    
     private func expect(_ sut: HTTPClient, toCompleteWith expectedResult: HTTPClientResult, onRequest url: URL, when stub: () -> Void, file: StaticString = #file, line: UInt = #line) {
         
         let expect = expectation(description: "expect delivers data on 200 response")
@@ -118,7 +82,7 @@ class HTTPClientTests: XCTestCase {
     private func makeSUT() -> HTTPClient {
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses?.insert(HTTPClientStub.self, at: 0)
-        return AFHTTPClient(configuration: configuration)
+        return AlamofireHTTPClient(configuration: configuration)
     }
 }
 
@@ -166,5 +130,4 @@ private class HTTPClientStub: URLProtocol {
     }
     
     override func stopLoading() { }
-    
 }

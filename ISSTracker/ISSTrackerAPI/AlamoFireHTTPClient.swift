@@ -9,21 +9,31 @@
 import Foundation
 import Alamofire
 
-final class AlamoFireHTTPClient: HTTPClient {
-    func getData(from url: URL, completionHandler: @escaping (HTTPClientResult) -> Void) {
-        Alamofire.request(url, method: .get)
+public struct UnexpectedValuesRepresentation: Error {}
+
+public final class AlamofireHTTPClient :HTTPClient {
+    
+    private let sessionManager: SessionManager
+    
+
+    public init(configuration: URLSessionConfiguration = .default) {
+        self.sessionManager = Alamofire.SessionManager(configuration: configuration)
+    }
+    
+    public func getData(from url: URL, completionHandler: @escaping (HTTPClientResult) -> Void) {
+        
+        self.sessionManager.request(url, method: .get)
             .validate()
             .responseJSON { response in
                 switch response.result {
-                case .success:
-                    if let HTTPResponse = response.response, let data = response.data {
-                        completionHandler(.success(HTTPResponse, data))
-                    } else {
-                        let error = NSError(domain: "unknown error", code: 1)
-                        completionHandler(.error(error))
-                    }
-                case .failure( let error):
+                case .failure(let error):
                     completionHandler(.error(error))
+                case .success:
+                    guard let HTTPResponse = response.response, let data = response.data else {
+                        completionHandler(.error(UnexpectedValuesRepresentation()))
+                        return
+                    }
+                    completionHandler(.success(HTTPResponse, data))
                 }
         }
     }

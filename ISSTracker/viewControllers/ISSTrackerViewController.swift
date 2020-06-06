@@ -17,7 +17,7 @@ class ISSTrackerViewController: UIViewController {
     var lineCoordinates:GMSMutablePath?
     var marker:GMSMarker?
     let LOCATION_POINTS_COUNT:UInt = 3
-    let ISSViewModel = ISSTrackerViewModel(loader: RemoteISSTrackerPositionLoader(client: AlamoFireHTTPClient(), url: URL(string: "http://api.open-notify.org/iss-now.json")!))
+    let ISSViewModel = ISSTrackerViewModel(loader: RemoteISSTrackerPositionLoader(client: AlamofireHTTPClient(), url: URL(string: "http://api.open-notify.org/iss-now.json")!))
     
     let activityData = ActivityData(message:"Updating position...")
     var activityIndicatorView:NVActivityIndicatorPresenter = NVActivityIndicatorPresenter.sharedInstance
