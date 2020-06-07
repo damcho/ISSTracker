@@ -6,12 +6,11 @@
 //  Copyright © 2019 Damian Modernell. All rights reserved.
 //
 
-import UserNotifications
+import Foundation
 
-class ISSTrackerViewModel: NSObject, LocationNotificationSchedulerDelegate {
+final class ISSTrackerViewModel {
     
     private var issTrackerLoader: ISSTrackerPositionLoader
-    private let locationManager = LocationNotificationsManager()
     let settingsObject = SettingsObject()
     var onFetchPositionError:((Error) -> ())?
     var onFetchPositionSuccess:((ISSTrackerPosition) -> ())?
@@ -19,24 +18,8 @@ class ISSTrackerViewModel: NSObject, LocationNotificationSchedulerDelegate {
 
     init(loader: ISSTrackerPositionLoader) {
         self.issTrackerLoader = loader
-        super.init()
         self.startTasks()
-        self.locationManager.delegate = self
     }
-    
-    func locationPermissionDenied() {
-        
-    }
-    
-    func notificationPermissionDenied() {
-        
-    }
-    
-    func notificationScheduled(error: Error?) {
-        
-    }
-
-
     
     func stopTasks() {
         if self.intervalTimer != nil {

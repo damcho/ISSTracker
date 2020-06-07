@@ -23,6 +23,7 @@
 		8B8A90F62484BFC000E50BD9 /* AlamoFireHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8A90F52484BFC000E50BD9 /* AlamoFireHTTPClient.swift */; };
 		8B8A90F82484C03600E50BD9 /* HTTPClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8A90F72484C03600E50BD9 /* HTTPClientProtocol.swift */; };
 		8B8A90FB248786A100E50BD9 /* HTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8A90FA248786A100E50BD9 /* HTTPClientTests.swift */; };
+		8B8FDD8B248CD61F0088D42E /* AppComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8FDD8A248CD61F0088D42E /* AppComposer.swift */; };
 		8B9A355C228C9D7500740C0F /* settingsObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A355B228C9D7500740C0F /* settingsObject.swift */; };
 		8B9A355F228C9DE800740C0F /* ISSTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A355E228C9DE800740C0F /* ISSTrackerViewModel.swift */; };
 		B2C7E51F16E38D48110753DA /* Pods_ISSTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A308C96A367B37A1D3E74BF3 /* Pods_ISSTrackerTests.framework */; };
@@ -59,6 +60,7 @@
 		8B8A90F52484BFC000E50BD9 /* AlamoFireHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamoFireHTTPClient.swift; sourceTree = "<group>"; };
 		8B8A90F72484C03600E50BD9 /* HTTPClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientProtocol.swift; sourceTree = "<group>"; };
 		8B8A90FA248786A100E50BD9 /* HTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientTests.swift; sourceTree = "<group>"; };
+		8B8FDD8A248CD61F0088D42E /* AppComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComposer.swift; sourceTree = "<group>"; };
 		8B9A355B228C9D7500740C0F /* settingsObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsObject.swift; sourceTree = "<group>"; };
 		8B9A355E228C9DE800740C0F /* ISSTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSTrackerViewModel.swift; sourceTree = "<group>"; };
 		97920EC0C4D7076A04A7F475 /* Pods-ISSTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ISSTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-ISSTracker/Pods-ISSTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,11 +122,11 @@
 		8B0E3FFE215D5596000F4BB0 /* ISSTracker */ = {
 			isa = PBXGroup;
 			children = (
-				8B8A90F22483CF1200E50BD9 /* ISSTrackerAPI */,
+				8B8FDD89248CD5B00088D42E /* main */,
+				8B8A90F22483CF1200E50BD9 /* API */,
 				8B9A355D228C9DC800740C0F /* viewModel */,
 				8B9A355A228C9D4E00740C0F /* model */,
 				8B771376228C88FB003712A4 /* viewControllers */,
-				8B0E3FFF215D5596000F4BB0 /* AppDelegate.swift */,
 				8B0E4003215D5596000F4BB0 /* Main.storyboard */,
 				8B0E4006215D5598000F4BB0 /* Assets.xcassets */,
 				8B0E4008215D5598000F4BB0 /* LaunchScreen.storyboard */,
@@ -151,14 +153,14 @@
 			path = viewControllers;
 			sourceTree = "<group>";
 		};
-		8B8A90F22483CF1200E50BD9 /* ISSTrackerAPI */ = {
+		8B8A90F22483CF1200E50BD9 /* API */ = {
 			isa = PBXGroup;
 			children = (
 				8B8A90F32483CF6700E50BD9 /* RemoteISSTrackerPositionLoader.swift */,
 				8B8A90F52484BFC000E50BD9 /* AlamoFireHTTPClient.swift */,
 				8B8A90F72484C03600E50BD9 /* HTTPClientProtocol.swift */,
 			);
-			path = ISSTrackerAPI;
+			path = API;
 			sourceTree = "<group>";
 		};
 		8B8A90F92487865F00E50BD9 /* ISSTrackerAPITests */ = {
@@ -168,6 +170,15 @@
 				8B8A90FA248786A100E50BD9 /* HTTPClientTests.swift */,
 			);
 			path = ISSTrackerAPITests;
+			sourceTree = "<group>";
+		};
+		8B8FDD89248CD5B00088D42E /* main */ = {
+			isa = PBXGroup;
+			children = (
+				8B0E3FFF215D5596000F4BB0 /* AppDelegate.swift */,
+				8B8FDD8A248CD61F0088D42E /* AppComposer.swift */,
+			);
+			path = main;
 			sourceTree = "<group>";
 		};
 		8B9A355A228C9D4E00740C0F /* model */ = {
@@ -381,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B8FDD8B248CD61F0088D42E /* AppComposer.swift in Sources */,
 				8B8A90F82484C03600E50BD9 /* HTTPClientProtocol.swift in Sources */,
 				8B0E4002215D5596000F4BB0 /* ISSTrackerViewController.swift in Sources */,
 				8B8A90F42483CF6700E50BD9 /* RemoteISSTrackerPositionLoader.swift in Sources */,
