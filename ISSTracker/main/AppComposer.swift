@@ -13,6 +13,7 @@ import GoogleMaps
 class AppComposer {
     static func build() -> UIViewController{
         GMSServices.provideAPIKey("AIzaSyAVIvISQPshSOtqRHKu7eZ3zrARhXC6bMI")
-        return UIViewController()
+        let issTrackerVC = ISSTrackerViewController()
+        return issTrackerVC
     }
 }
