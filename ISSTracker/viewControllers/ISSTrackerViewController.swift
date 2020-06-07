@@ -13,14 +13,19 @@ import NVActivityIndicatorView
 
 class ISSTrackerViewController: UIViewController {
     
-    var mapView:GMSMapView?
-    var lineCoordinates:GMSMutablePath?
-    var marker:GMSMarker?
-    let LOCATION_POINTS_COUNT:UInt = 3
-    let ISSViewModel = ISSTrackerViewModel(loader: RemoteISSTrackerPositionLoader(client: AlamofireHTTPClient(), url: URL(string: "http://api.open-notify.org/iss-now.json")!))
+    private var mapView:GMSMapView?
+    private var lineCoordinates:GMSMutablePath?
+    private var marker:GMSMarker?
+    private let LOCATION_POINTS_COUNT:UInt = 3
+    private var ISSViewModel: ISSTrackerViewModel?
     
-    let activityData = ActivityData(message:"Updating position...")
-    var activityIndicatorView:NVActivityIndicatorPresenter = NVActivityIndicatorPresenter.sharedInstance
+    private let activityData = ActivityData(message:"Updating position...")
+    private var activityIndicatorView:NVActivityIndicatorPresenter = NVActivityIndicatorPresenter.sharedInstance
+    
+    convenience init(viewModel: ISSTrackerViewModel) {
+        self.init()
+        self.ISSViewModel = viewModel
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +36,11 @@ class ISSTrackerViewController: UIViewController {
     
     func addObservers() {
         NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] (notification) in
-            self?.ISSViewModel.stopTasks()
+            self?.ISSViewModel?.stopTasks()
         }
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] (notification) in
             self?.resetMap()
-            self?.ISSViewModel.startTasks()
+            self?.ISSViewModel?.startTasks()
         }
     }
     
@@ -48,7 +53,7 @@ class ISSTrackerViewController: UIViewController {
     func setupCallbacks() {
         activityIndicatorView.startAnimating(activityData, NVActivityIndicatorView.DEFAULT_FADE_IN_ANIMATION)
         
-        self.ISSViewModel.onFetchPositionSuccess = {[weak self] (ISSPosition:ISSTrackerPosition) -> () in
+        self.ISSViewModel?.onFetchPositionSuccess = {[weak self] (ISSPosition:ISSTrackerPosition) -> () in
             
             self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
             
@@ -65,7 +70,7 @@ class ISSTrackerViewController: UIViewController {
             self?.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition.coordinate.latitude, longitude: ISSPosition.coordinate.longitude))
         }
         
-        self.ISSViewModel.onFetchPositionError =  {[weak self] (error:Error) -> () in
+        self.ISSViewModel?.onFetchPositionError =  {[weak self] (error:Error) -> () in
             self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
             
             let alert = UIAlertController(title: "Alert", message: error.localizedDescription ,preferredStyle: UIAlertController.Style.alert)
