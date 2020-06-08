@@ -15,7 +15,8 @@ final class ISSTrackerViewModel {
     var onFetchPositionError:((Error) -> ())?
     var onFetchPositionSuccess:((ISSTrackerPosition) -> ())?
     var intervalTimer: Timer?
-
+    var title = "ISSTracker"
+    
     init(loader: ISSTrackerPositionLoader) {
         self.issTrackerLoader = loader
         self.startTasks()

@@ -120,6 +120,7 @@
 		8B0E3FFE215D5596000F4BB0 /* ISSTracker */ = {
 			isa = PBXGroup;
 			children = (
+				8B8FDD8C248CEE850088D42E /* location */,
 				8B8FDD89248CD5B00088D42E /* main */,
 				8B8A90F22483CF1200E50BD9 /* API */,
 				8B9A355D228C9DC800740C0F /* viewModel */,
@@ -178,12 +179,21 @@
 			path = main;
 			sourceTree = "<group>";
 		};
+		8B8FDD8C248CEE850088D42E /* location */ = {
+			isa = PBXGroup;
+			children = (
+				8B2A9C7922AED6F800690354 /* LocationManagerProtocol.swift */,
+				8B2A9C7B22AEDF6800690354 /* LocationNotificationInfo.swift */,
+				8B2A9C7722AED24900690354 /* LoctionNotificationsManager.swift */,
+			);
+			path = location;
+			sourceTree = "<group>";
+		};
 		8B9A355A228C9D4E00740C0F /* model */ = {
 			isa = PBXGroup;
 			children = (
 				8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */,
 				8B9A355B228C9D7500740C0F /* settingsObject.swift */,
-				8B2A9C7B22AEDF6800690354 /* LocationNotificationInfo.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -192,8 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				8B9A355E228C9DE800740C0F /* ISSTrackerViewModel.swift */,
-				8B2A9C7722AED24900690354 /* LoctionNotificationsManager.swift */,
-				8B2A9C7922AED6F800690354 /* LocationManagerProtocol.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";

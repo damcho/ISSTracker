@@ -28,6 +28,7 @@ class ISSTrackerViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        self.title = ISSViewModel?.title
         super.viewDidLoad()
         self.setupCallbacks()
         self.loadSettingsButton()
