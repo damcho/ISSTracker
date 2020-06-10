@@ -25,6 +25,7 @@ class ISSTrackerViewController: UIViewController {
     convenience init(viewModel: ISSTrackerViewModel) {
         self.init()
         self.ISSViewModel = viewModel
+        GMSServices.provideAPIKey("AIzaSyAVIvISQPshSOtqRHKu7eZ3zrARhXC6bMI")
     }
     
     override func viewDidLoad() {

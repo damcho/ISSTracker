@@ -8,11 +8,9 @@
 
 import Foundation
 import UIKit
-import GoogleMaps
 
 class AppComposer {
     static func build() -> UIViewController{
-        GMSServices.provideAPIKey("AIzaSyAVIvISQPshSOtqRHKu7eZ3zrARhXC6bMI")
         let httpClient = AlamofireHTTPClient()
         let remoteISSTrackerLoader = RemoteISSTrackerPositionLoader(client: httpClient, url: URL(string: "http://api.open-notify.org/iss-now.json")!)
         let viewModel = ISSTrackerViewModel(loader: remoteISSTrackerLoader)
