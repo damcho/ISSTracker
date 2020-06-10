@@ -33,15 +33,16 @@ class ISSTrackerViewController: UIViewController {
         self.setupCallbacks()
         self.loadSettingsButton()
         self.addObservers()
+        self.ISSViewModel?.startReceivingPositionUpdates()
     }
     
     func addObservers() {
         NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] (notification) in
-            self?.ISSViewModel?.stopTasks()
+            self?.ISSViewModel?.stopReceivingPositionUpdates()
         }
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] (notification) in
             self?.resetMap()
-            self?.ISSViewModel?.startTasks()
+            self?.ISSViewModel?.startReceivingPositionUpdates()
         }
     }
     

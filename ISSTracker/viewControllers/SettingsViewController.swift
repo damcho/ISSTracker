@@ -17,7 +17,7 @@ class SettingsViewController: FormViewController {
         super.viewDidLoad()
         self.title = "Settings"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped))
-        self.ISStrackerVM?.stopTasks()
+        self.ISStrackerVM?.stopReceivingPositionUpdates()
         self.createForm()
     }
     
