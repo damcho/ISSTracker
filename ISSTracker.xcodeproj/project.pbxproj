@@ -12,9 +12,6 @@
 		8B0E4002215D5596000F4BB0 /* ISSTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E4001215D5596000F4BB0 /* ISSTrackerViewController.swift */; };
 		8B0E4007215D5598000F4BB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4006215D5598000F4BB0 /* Assets.xcassets */; };
 		8B0E400A215D5598000F4BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4008215D5598000F4BB0 /* LaunchScreen.storyboard */; };
-		8B2A9C7822AED24900690354 /* LoctionNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2A9C7722AED24900690354 /* LoctionNotificationsManager.swift */; };
-		8B2A9C7A22AED6F800690354 /* LocationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2A9C7922AED6F800690354 /* LocationManagerProtocol.swift */; };
-		8B2A9C7C22AEDF6800690354 /* LocationNotificationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2A9C7B22AEDF6800690354 /* LocationNotificationInfo.swift */; };
 		8B424076215D5B2100E6A5F7 /* iSSTrackerPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */; };
 		8B771378228C8922003712A4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B771377228C8922003712A4 /* SettingsViewController.swift */; };
 		8B8A90F124810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8A90F024810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift */; };
@@ -48,9 +45,6 @@
 		8B0E400B215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B0E4010215D5598000F4BB0 /* ISSTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ISSTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0E4016215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B2A9C7722AED24900690354 /* LoctionNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoctionNotificationsManager.swift; sourceTree = "<group>"; };
-		8B2A9C7922AED6F800690354 /* LocationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerProtocol.swift; sourceTree = "<group>"; };
-		8B2A9C7B22AEDF6800690354 /* LocationNotificationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNotificationInfo.swift; sourceTree = "<group>"; };
 		8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iSSTrackerPosition.swift; sourceTree = "<group>"; };
 		8B771377228C8922003712A4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8B8A90F024810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSTrackerPositionLoaderTests.swift; sourceTree = "<group>"; };
@@ -182,9 +176,6 @@
 		8B8FDD8C248CEE850088D42E /* location */ = {
 			isa = PBXGroup;
 			children = (
-				8B2A9C7922AED6F800690354 /* LocationManagerProtocol.swift */,
-				8B2A9C7B22AEDF6800690354 /* LocationNotificationInfo.swift */,
-				8B2A9C7722AED24900690354 /* LoctionNotificationsManager.swift */,
 			);
 			path = location;
 			sourceTree = "<group>";
@@ -402,13 +393,10 @@
 				8B8A90F42483CF6700E50BD9 /* RemoteISSTrackerPositionLoader.swift in Sources */,
 				8B8A90F62484BFC000E50BD9 /* AlamoFireHTTPClient.swift in Sources */,
 				8B0E4000215D5596000F4BB0 /* AppDelegate.swift in Sources */,
-				8B2A9C7822AED24900690354 /* LoctionNotificationsManager.swift in Sources */,
 				8B771378228C8922003712A4 /* SettingsViewController.swift in Sources */,
-				8B2A9C7C22AEDF6800690354 /* LocationNotificationInfo.swift in Sources */,
 				8B9A355F228C9DE800740C0F /* ISSTrackerViewModel.swift in Sources */,
 				8B424076215D5B2100E6A5F7 /* iSSTrackerPosition.swift in Sources */,
 				8B9A355C228C9D7500740C0F /* settingsObject.swift in Sources */,
-				8B2A9C7A22AED6F800690354 /* LocationManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
