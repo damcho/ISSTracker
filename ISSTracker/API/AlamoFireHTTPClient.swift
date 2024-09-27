@@ -13,11 +13,11 @@ public struct UnexpectedValuesRepresentation: Error {}
 
 public final class AlamofireHTTPClient :HTTPClient {
     
-    private let sessionManager: SessionManager
+    private let sessionManager: Session
     
 
     public init(configuration: URLSessionConfiguration = .default) {
-        self.sessionManager = Alamofire.SessionManager(configuration: configuration)
+        self.sessionManager = Alamofire.Session(configuration: configuration)
     }
     
     public func getData(from url: URL, completionHandler: @escaping (HTTPClientResult) -> Void) {

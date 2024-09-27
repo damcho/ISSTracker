@@ -1,53 +1,62 @@
 PODS:
-  - Alamofire (4.9.1)
-  - Eureka (5.1.0)
-  - GoogleMaps (3.7.0):
-    - GoogleMaps/Maps (= 3.7.0)
-  - GoogleMaps/Base (3.7.0)
-  - GoogleMaps/Maps (3.7.0):
+  - Alamofire (5.9.1)
+  - Eureka (5.5.0)
+  - GoogleMaps (7.4.0):
+    - GoogleMaps/Maps (= 7.4.0)
+  - GoogleMaps/Base (7.4.0)
+  - GoogleMaps/Maps (7.4.0):
     - GoogleMaps/Base
-  - GooglePlaces (3.7.0):
-    - GoogleMaps/Base (= 3.7.0)
-  - MaterialComponents/AnimationTiming (97.0.1)
-  - MaterialComponents/Buttons (97.0.1):
+  - GooglePlaces (7.4.0)
+  - MaterialComponents/AnimationTiming (124.2.0)
+  - MaterialComponents/Availability (124.2.0)
+  - MaterialComponents/Buttons (124.2.0):
     - MaterialComponents/Elevation
     - MaterialComponents/Ink
     - MaterialComponents/private/Math
     - MaterialComponents/Ripple
+    - MaterialComponents/Shadow
     - MaterialComponents/ShadowElevations
     - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
     - MaterialComponents/Shapes
     - MaterialComponents/Typography
     - MDFInternationalization
     - MDFTextAccessibility
-  - MaterialComponents/Elevation (97.0.1):
+  - MaterialComponents/Elevation (124.2.0):
+    - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/Ink (97.0.1):
+  - MaterialComponents/Ink (124.2.0):
+    - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/private/Application (97.0.1)
-  - MaterialComponents/private/Color (97.0.1)
-  - MaterialComponents/private/Math (97.0.1)
-  - MaterialComponents/Ripple (97.0.1):
+  - MaterialComponents/private/Application (124.2.0)
+  - MaterialComponents/private/Color (124.2.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/Math (124.2.0)
+  - MaterialComponents/Ripple (124.2.0):
     - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/ShadowElevations (97.0.1)
-  - MaterialComponents/ShadowLayer (97.0.1):
+  - MaterialComponents/Shadow (124.2.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/ShadowElevations (124.2.0)
+  - MaterialComponents/ShadowLayer (124.2.0):
     - MaterialComponents/ShadowElevations
-  - MaterialComponents/Shapes (97.0.1):
+  - MaterialComponents/ShapeLibrary (124.2.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (124.2.0):
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
     - MaterialComponents/ShadowLayer
-  - MaterialComponents/Typography (97.0.1):
+  - MaterialComponents/Typography (124.2.0):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
-  - MDFInternationalization (2.0.0)
-  - MDFTextAccessibility (2.0.0)
-  - NVActivityIndicatorView (4.8.0):
-    - NVActivityIndicatorView/Presenter (= 4.8.0)
-  - NVActivityIndicatorView/Presenter (4.8.0)
+    - MDFTextAccessibility
+  - MDFInternationalization (3.0.0)
+  - MDFTextAccessibility (2.0.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -55,7 +64,6 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - MaterialComponents/Buttons
-  - NVActivityIndicatorView
 
 SPEC REPOS:
   trunk:
@@ -66,18 +74,16 @@ SPEC REPOS:
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
-    - NVActivityIndicatorView
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  Eureka: 18a5076dcf0c41f9cd9748aa1c42f4d11434bdae
-  GoogleMaps: 55da829c68aa931f3ae982b9e341cc2f3d89c587
-  GooglePlaces: a62077320f9d64239245af63aa1aa136393ebeb6
-  MaterialComponents: f0663c214cc879861da6a7f8add330c3c0ec017d
-  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
-  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
-  NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
+  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
+  Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
+  GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
+  GooglePlaces: 544e908d94860bf6f8fc1865b80d2c7eb6b5f937
+  MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
+  MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
+  MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
 
-PODFILE CHECKSUM: 5a173ba94bcc565f2f488e6f1bdea586d782e42f
+PODFILE CHECKSUM: 25e60dc3ca7f0c349b58d98075cf6b167d3ed33e
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.15.2

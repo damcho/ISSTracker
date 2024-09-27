@@ -9,7 +9,6 @@
 import UIKit
 import GoogleMaps
 import MaterialComponents
-import NVActivityIndicatorView
 
 class ISSTrackerViewController: UIViewController {
     
@@ -18,9 +17,6 @@ class ISSTrackerViewController: UIViewController {
     private var marker:GMSMarker?
     private let LOCATION_POINTS_COUNT:UInt = 3
     private var ISSViewModel: ISSTrackerViewModel?
-    
-    private let activityData = ActivityData(message:"Updating position...")
-    private var activityIndicatorView:NVActivityIndicatorPresenter = NVActivityIndicatorPresenter.sharedInstance
     
     convenience init(viewModel: ISSTrackerViewModel) {
         self.init()
@@ -54,12 +50,8 @@ class ISSTrackerViewController: UIViewController {
     }
     
     func setupCallbacks() {
-        activityIndicatorView.startAnimating(activityData, NVActivityIndicatorView.DEFAULT_FADE_IN_ANIMATION)
-        
         self.ISSViewModel?.onFetchPositionSuccess = {[weak self] (ISSPosition:ISSTrackerPosition) -> () in
-            
-            self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
-            
+                        
             self?.lineCoordinates?.add(CLLocationCoordinate2D(latitude: ISSPosition.coordinate.latitude, longitude: ISSPosition.coordinate.longitude))
             if self?.lineCoordinates?.count() ?? 0 >= self!.LOCATION_POINTS_COUNT {
                 self?.lineCoordinates?.removeCoordinate(at: 0)
@@ -74,7 +66,6 @@ class ISSTrackerViewController: UIViewController {
         }
         
         self.ISSViewModel?.onFetchPositionError =  {[weak self] (error:Error) -> () in
-            self?.activityIndicatorView.stopAnimating(NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION)
             
             let alert = UIAlertController(title: "Alert", message: error.localizedDescription ,preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

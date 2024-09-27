@@ -9,12 +9,13 @@
 import Foundation
 import UIKit
 
-class AppComposer {
+enum AppComposer {
     static func build() -> UIViewController{
         let httpClient = AlamofireHTTPClient()
         let remoteISSTrackerLoader = RemoteISSTrackerPositionLoader(client: httpClient, url: URL(string: "http://api.open-notify.org/iss-now.json")!)
         let viewModel = ISSTrackerViewModel(loader: remoteISSTrackerLoader)
         let issTrackerVC = UINavigationController(rootViewController: ISSTrackerViewController(viewModel: viewModel))
+      
         return issTrackerVC
     }
 }
