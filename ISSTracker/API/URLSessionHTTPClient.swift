@@ -16,7 +16,7 @@ public class URLSessionHTTPClient {
     }
 }
 
-extension URLSessionHTTPClient: AsyncHTTPClient {
+extension URLSessionHTTPClient {
     public func getData(from url: URL) async -> HTTPClientResult {
         do {
             let (data, response) = try await session.data(from: url)
