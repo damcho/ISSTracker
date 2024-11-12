@@ -7,26 +7,16 @@
 //
 
 import XCTest
-
-protocol Logger {
-    func logEvent(_ message: String)
-}
-
-struct EventsLoggerDecorator {
-    let Logger: Logger
-    func logEvent(_ message: String) {
-        Logger.logEvent(message)
-    }
-}
+import ISSTracker
 
 final class EventsLoggerDecoratorTests: XCTestCase {
 
     func test_calls_logger_on_loggerd_event() {
         // GIVEN
         var didLogEvent = false
-        let sut = EventsLoggerDecorator(Logger: DummyLogger(onLoggingCalled: {
+        let sut = makeSUT {
             didLogEvent = true
-        }))
+        }
         
         // WHEN
         sut.logEvent("some event")
@@ -35,6 +25,14 @@ final class EventsLoggerDecoratorTests: XCTestCase {
         XCTAssertTrue(didLogEvent)
     }
 }
+
+extension EventsLoggerDecoratorTests {
+    func makeSUT(_ onLoggerCalled: @escaping () -> Void) -> EventsLoggerDecorator<Encodable> {
+        EventsLoggerDecorator(Logger: DummyLogger(onLoggingCalled: onLoggerCalled), decoratee: EncodableDecoratee())
+    }
+}
+
+struct EncodableDecoratee: Encodable {}
 
 struct DummyLogger: Logger {
     let onLoggingCalled: () -> Void
