@@ -13,6 +13,7 @@
 		8B0E400A215D5598000F4BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4008215D5598000F4BB0 /* LaunchScreen.storyboard */; };
 		8B338D4E2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B338D4D2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift */; };
 		8B338D522CE3EB32000DF097 /* EventsLoggerDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B338D512CE3EB32000DF097 /* EventsLoggerDecorator.swift */; };
+		8B338D542CE3F57D000DF097 /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B338D532CE3F57D000DF097 /* ConsoleLogger.swift */; };
 		8B424076215D5B2100E6A5F7 /* iSSTrackerPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */; };
 		8B771378228C8922003712A4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B771377228C8922003712A4 /* SettingsViewController.swift */; };
 		8B8A90F124810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8A90F024810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift */; };
@@ -51,6 +52,7 @@
 		8B0E4016215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B338D4D2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsLoggerDecoratorTests.swift; sourceTree = "<group>"; };
 		8B338D512CE3EB32000DF097 /* EventsLoggerDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsLoggerDecorator.swift; sourceTree = "<group>"; };
+		8B338D532CE3F57D000DF097 /* ConsoleLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 		8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iSSTrackerPosition.swift; sourceTree = "<group>"; };
 		8B771377228C8922003712A4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8B8A90F024810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSTrackerPositionLoaderTests.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				8B338D512CE3EB32000DF097 /* EventsLoggerDecorator.swift */,
+				8B338D532CE3F57D000DF097 /* ConsoleLogger.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				8B9A355F228C9DE800740C0F /* ISSTrackerViewModel.swift in Sources */,
 				8B424076215D5B2100E6A5F7 /* iSSTrackerPosition.swift in Sources */,
 				8B338D522CE3EB32000DF097 /* EventsLoggerDecorator.swift in Sources */,
+				8B338D542CE3F57D000DF097 /* ConsoleLogger.swift in Sources */,
 				8B9A355C228C9D7500740C0F /* settingsObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
