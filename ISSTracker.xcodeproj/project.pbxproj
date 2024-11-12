@@ -11,6 +11,7 @@
 		8B0E4002215D5596000F4BB0 /* ISSTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E4001215D5596000F4BB0 /* ISSTrackerViewController.swift */; };
 		8B0E4007215D5598000F4BB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4006215D5598000F4BB0 /* Assets.xcassets */; };
 		8B0E400A215D5598000F4BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4008215D5598000F4BB0 /* LaunchScreen.storyboard */; };
+		8B338D4E2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B338D4D2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift */; };
 		8B424076215D5B2100E6A5F7 /* iSSTrackerPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */; };
 		8B771378228C8922003712A4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B771377228C8922003712A4 /* SettingsViewController.swift */; };
 		8B8A90F124810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8A90F024810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift */; };
@@ -47,6 +48,7 @@
 		8B0E400B215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B0E4010215D5598000F4BB0 /* ISSTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ISSTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0E4016215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B338D4D2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsLoggerDecoratorTests.swift; sourceTree = "<group>"; };
 		8B424075215D5B2100E6A5F7 /* iSSTrackerPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iSSTrackerPosition.swift; sourceTree = "<group>"; };
 		8B771377228C8922003712A4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8B8A90F024810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSTrackerPositionLoaderTests.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		8B8A90F92487865F00E50BD9 /* ISSTrackerAPITests */ = {
 			isa = PBXGroup;
 			children = (
+				8B338D4D2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift */,
 				8B8A90F024810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift */,
 				8B8A90FA248786A100E50BD9 /* HTTPClientTests.swift */,
 			);
@@ -405,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B8A90FB248786A100E50BD9 /* HTTPClientTests.swift in Sources */,
+				8B338D4E2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift in Sources */,
 				8B8A90F124810B6700E50BD9 /* ISSTrackerPositionLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
