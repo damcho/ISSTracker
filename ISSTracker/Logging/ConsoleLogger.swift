@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ConsoleLogger {
+class ConsoleLogger: Logger {
     static let sharedInstance = ConsoleLogger()
     
     private init() {}
