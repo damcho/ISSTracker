@@ -11,6 +11,7 @@ target 'ISSTracker' do
 	pod 'Alamofire'
   pod 'MaterialComponents/Buttons'
   pod 'Eureka'
+  pod 'FirebaseAnalytics'
 
   target 'ISSTrackerTests' do
     inherit! :search_paths

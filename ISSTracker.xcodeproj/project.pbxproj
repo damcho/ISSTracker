@@ -25,6 +25,8 @@
 		8B8FDD8B248CD61F0088D42E /* AppComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8FDD8A248CD61F0088D42E /* AppComposer.swift */; };
 		8B9A355C228C9D7500740C0F /* settingsObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A355B228C9D7500740C0F /* settingsObject.swift */; };
 		8B9A355F228C9DE800740C0F /* ISSTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9A355E228C9DE800740C0F /* ISSTrackerViewModel.swift */; };
+		8BAE4DF32CE7C5E70085447B /* FirebaseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE4DF22CE7C5E70085447B /* FirebaseLogger.swift */; };
+		8BAE4DF52CE7C77B0085447B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE4DF42CE7C77B0085447B /* GoogleService-Info.plist */; };
 		8BC2AC4D2912B7C8007836E8 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC2AC4C2912B7C8007836E8 /* URLSessionHTTPClient.swift */; };
 		8BE41B012CC0448500A0E6A3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8BE41B002CC0448500A0E6A3 /* README.md */; };
 		B2C7E51F16E38D48110753DA /* Pods_ISSTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A308C96A367B37A1D3E74BF3 /* Pods_ISSTrackerTests.framework */; };
@@ -63,6 +65,8 @@
 		8B8FDD8A248CD61F0088D42E /* AppComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComposer.swift; sourceTree = "<group>"; };
 		8B9A355B228C9D7500740C0F /* settingsObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsObject.swift; sourceTree = "<group>"; };
 		8B9A355E228C9DE800740C0F /* ISSTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISSTrackerViewModel.swift; sourceTree = "<group>"; };
+		8BAE4DF22CE7C5E70085447B /* FirebaseLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLogger.swift; sourceTree = "<group>"; };
+		8BAE4DF42CE7C77B0085447B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8BC2AC4C2912B7C8007836E8 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		8BE41B002CC0448500A0E6A3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		97920EC0C4D7076A04A7F475 /* Pods-ISSTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ISSTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-ISSTracker/Pods-ISSTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 		8B0E3FFE215D5596000F4BB0 /* ISSTracker */ = {
 			isa = PBXGroup;
 			children = (
+				8BAE4DF42CE7C77B0085447B /* GoogleService-Info.plist */,
 				8B338D502CE3EB1D000DF097 /* Logging */,
 				8B8FDD89248CD5B00088D42E /* main */,
 				8B8A90F22483CF1200E50BD9 /* API */,
@@ -152,6 +157,7 @@
 			children = (
 				8B338D512CE3EB32000DF097 /* EventsLoggerDecorator.swift */,
 				8B338D532CE3F57D000DF097 /* ConsoleLogger.swift */,
+				8BAE4DF22CE7C5E70085447B /* FirebaseLogger.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";
@@ -313,6 +319,7 @@
 				8BE41B012CC0448500A0E6A3 /* README.md in Resources */,
 				8B0E400A215D5598000F4BB0 /* LaunchScreen.storyboard in Resources */,
 				8B0E4007215D5598000F4BB0 /* Assets.xcassets in Resources */,
+				8BAE4DF52CE7C77B0085447B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +420,7 @@
 				8B771378228C8922003712A4 /* SettingsViewController.swift in Sources */,
 				8B9A355F228C9DE800740C0F /* ISSTrackerViewModel.swift in Sources */,
 				8B424076215D5B2100E6A5F7 /* iSSTrackerPosition.swift in Sources */,
+				8BAE4DF32CE7C5E70085447B /* FirebaseLogger.swift in Sources */,
 				8B338D522CE3EB32000DF097 /* EventsLoggerDecorator.swift in Sources */,
 				8B338D542CE3F57D000DF097 /* ConsoleLogger.swift in Sources */,
 				8B9A355C228C9D7500740C0F /* settingsObject.swift in Sources */,
