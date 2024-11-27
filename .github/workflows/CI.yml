@@ -29,4 +29,4 @@ jobs:
         run: pod install
 
       - name: Build and Test
-        run: xcodebuild clean build test -workspace "ISSTracker.xcworkspace" -scheme "ISSTracker" -sdk "iphonesimulator" -configuration Debug CODE_SIGNING_REQUIRED=NO -destination "platform=iOS Simulator,name=iPhone 11" ONLY_ACTIVE_ARCH=YES
+        run: xcodebuild clean build test -workspace "ISSTracker.xcworkspace" -scheme "ISSTracker" -sdk "iphonesimulator" -configuration Debug CODE_SIGNING_REQUIRED=NO -destination "platform=iOS Simulator,name=iPhone 15" ONLY_ACTIVE_ARCH=YES
