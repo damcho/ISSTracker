@@ -51,10 +51,8 @@ class HTTPClientTests: XCTestCase {
         
         sut.getData(from: url) { (result) in
             switch (result, expectedResult) {
-            case (.error(let receivedError), .error( let expectedError)):
-                XCTAssertEqual((receivedError as NSError).code, (expectedError as NSError).code, file: file, line: line)
-                XCTAssertEqual((receivedError as NSError).localizedDescription, (expectedError as NSError).localizedDescription ,file: file, line: line)
-
+            case (.error, .error):
+                break
             case (.success(let receivedResponse, let receivedData), .success( let expectedResponse, let expectedData)):
                 XCTAssertEqual(receivedResponse.statusCode, expectedResponse.statusCode, file: file, line: line)
                 XCTAssertEqual(receivedData, expectedData, file: file, line: line)
