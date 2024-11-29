@@ -11,7 +11,7 @@ import UIKit
 
 enum AppComposer {
     static func build() -> UIViewController{
-        let analyticsLogger = FirebaseLogger.sharedInstance
+        let analyticsLogger = ConsoleLogger.sharedInstance
         let httpEventsLogger = EventsLoggerDecorator(Logger: analyticsLogger, decoratee: AlamofireHTTPClient())
         let remoteISSTrackerLoader = RemoteISSTrackerPositionLoader(client: httpEventsLogger, url: URL(string: "http://api.open-notify.org/iss-now.json")!)
         let viewModel = ISSTrackerViewModel(loader: remoteISSTrackerLoader)
