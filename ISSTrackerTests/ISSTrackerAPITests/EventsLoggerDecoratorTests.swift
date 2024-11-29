@@ -14,7 +14,7 @@ final class EventsLoggerDecoratorTests: XCTestCase {
     func test_calls_logger_on_loggerd_event() {
         // GIVEN
         var didLogEvent = false
-        let sut = makeSUT {
+        let sut = makeSUT { message in
             didLogEvent = true
         }
         
@@ -27,7 +27,7 @@ final class EventsLoggerDecoratorTests: XCTestCase {
 }
 
 extension EventsLoggerDecoratorTests {
-    func makeSUT(_ onLoggerCalled: @escaping () -> Void) -> EventsLoggerDecorator<Encodable> {
+    func makeSUT(_ onLoggerCalled: @escaping (String) -> Void) -> EventsLoggerDecorator<Encodable> {
         EventsLoggerDecorator(Logger: DummyLogger(onLoggingCalled: onLoggerCalled), decoratee: EncodableDecoratee())
     }
 }
@@ -35,8 +35,8 @@ extension EventsLoggerDecoratorTests {
 struct EncodableDecoratee: Encodable {}
 
 struct DummyLogger: Logger {
-    let onLoggingCalled: () -> Void
+    let onLoggingCalled: (String) -> Void
     func logEvent(_ message: String) {
-        onLoggingCalled()
+        onLoggingCalled(message)
     }
 }
