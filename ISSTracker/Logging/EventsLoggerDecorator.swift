@@ -29,3 +29,16 @@ extension EventsLoggerDecorator: HTTPClient where T: HTTPClient {
         decoratee.getData(from: url, completionHandler: completionHandler)
     }
 }
+
+extension EventsLoggerDecorator: ISSTrackerPositionLoader where T: ISSTrackerPositionLoader {
+    public func loadISSPosition(completionHandler: @escaping ISSTracker.QueryResut) {
+        decoratee.loadISSPosition(completionHandler: { result in
+            switch result {
+            case let .error(anError):
+                logEvent(anError.localizedDescription)
+            case .success: break
+            }
+            completionHandler(result)
+        })
+    }
+}

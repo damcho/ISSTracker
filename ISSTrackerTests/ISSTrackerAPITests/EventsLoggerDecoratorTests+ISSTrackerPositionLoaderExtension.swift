@@ -9,19 +9,6 @@
 import XCTest
 @testable import ISSTracker
 
-extension EventsLoggerDecorator: ISSTrackerPositionLoader where T: ISSTrackerPositionLoader {
-    public func loadISSPosition(completionHandler: @escaping ISSTracker.QueryResut) {
-        decoratee.loadISSPosition(completionHandler: { result in
-            switch result {
-            case let .error(anError):
-                logEvent(anError.localizedDescription)
-            case .success: break
-            }
-            completionHandler(result)
-        })
-    }
-}
-
 extension EventsLoggerDecoratorTests {
     func test_logs_connectivity_error_on_position_loading_failure() { 
         expect([ISSTrackerLoaderError.Connectivity.localizedDescription], stubbedResult: .error(.Connectivity))
