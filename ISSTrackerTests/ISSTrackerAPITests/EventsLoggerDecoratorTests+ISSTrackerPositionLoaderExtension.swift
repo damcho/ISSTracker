@@ -24,50 +24,18 @@ extension EventsLoggerDecorator: ISSTrackerPositionLoader where T: ISSTrackerPos
 
 extension EventsLoggerDecoratorTests {
     func test_logs_connectivity_error_on_position_loading_failure() { 
-        // GIVEN
-        let expectation = expectation(description: "wait for position loading to fail")
-        var loggedErrorCallCount = 0
-        let sut = makeISSTrackerPositionLoaderSUT(
-            onLoggingCalled: {
-                loggedErrorCallCount += 1
-            },
-            stubbedResult: .error(.Connectivity)
-        )
-        // WHEN
-        sut.loadISSPosition { result in
-            expectation.fulfill()
-            XCTAssertEqual(loggedErrorCallCount, 1)
-        }
-        
-        // THEN
-        wait(for: [expectation], timeout: 1)
+        expect(1, stubbedResult: .error(.Connectivity))
     }
     
     func test_does_not_log_event_on_position_loaded_successfully() {
-        // GIVEN
-        let expectation = expectation(description: "wait for position loading to succeed")
-        var loggedErrorCallCount = 0
-        let sut = makeISSTrackerPositionLoaderSUT(
-            onLoggingCalled: {
-                loggedErrorCallCount += 1
-            },
-            stubbedResult: .success(
-                ISSTrackerPosition(
-                    coordinate: Coordinate(
-                        latitude: 1.0,
-                        longitude: 1.0),
-                    timestamp: 1.0
-                )
+        expect(0, stubbedResult: .success(
+            ISSTrackerPosition(
+                coordinate: Coordinate(
+                    latitude: 1.0,
+                    longitude: 1.0),
+                timestamp: 1.0
             )
-        )
-        // WHEN
-        sut.loadISSPosition { result in
-            expectation.fulfill()
-            XCTAssertEqual(loggedErrorCallCount, 0)
-        }
-        
-        // THEN
-        wait(for: [expectation], timeout: 1)
+        ))
     }
 }
 
@@ -77,6 +45,26 @@ extension EventsLoggerDecoratorTests {
             Logger: DummyLogger(onLoggingCalled: onLoggingCalled),
             decoratee: ISSTrackerPositionLoaderStub(stub: stubbedResult)
         )
+    }
+    
+    func expect(_ expectedloggincCallCount: Int, stubbedResult: ISSTrackerPositionLoaderResult) {
+        // GIVEN
+        let expectation = expectation(description: "wait for position loading to respond")
+        var loggedErrorCallCount = 0
+        let sut = makeISSTrackerPositionLoaderSUT(
+            onLoggingCalled: {
+                loggedErrorCallCount += 1
+            },
+            stubbedResult: stubbedResult
+        )
+        // WHEN
+        sut.loadISSPosition { result in
+            expectation.fulfill()
+            XCTAssertEqual(loggedErrorCallCount, expectedloggincCallCount)
+        }
+        
+        // THEN
+        wait(for: [expectation], timeout: 1)
     }
 }
 
