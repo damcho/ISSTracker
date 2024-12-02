@@ -24,6 +24,11 @@ public enum ISSTrackerLoaderError: Error {
     case InvalidData
 }
 
+extension ISSTrackerLoaderError: LocalizedError {
+    public var errorDescription: String? {
+        "A connectivity error has occurred"
+    }
+}
 
 public final class RemoteISSTrackerPositionLoader {
     
