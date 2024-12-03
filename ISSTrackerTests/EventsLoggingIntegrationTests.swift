@@ -9,14 +9,6 @@
 import XCTest
 @testable import ISSTracker
 
-extension AppComposer {
-    static func compose(with httpclient: some HTTPClient, logger: Logger) -> ISSTrackerViewModel {
-        let remoteISSTrackerLoader = RemoteISSTrackerPositionLoader(client: httpclient, url: URL(string: "http://api.open-notify.org/iss-now.json")!)
-        let issPositionLoaderLoggerDecorator = EventsLoggerDecorator(Logger: logger, decoratee: remoteISSTrackerLoader)
-        return ISSTrackerViewModel(loader: issPositionLoaderLoggerDecorator)
-    }
-}
-
 class EventsLoggingIntegrationTests: XCTestCase {
 
     func test_logs_connectivity_error_on_http_request_failure() {
