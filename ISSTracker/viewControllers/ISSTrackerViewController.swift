@@ -64,13 +64,6 @@ class ISSTrackerViewController: UIViewController {
             self?.marker?.position = CLLocationCoordinate2D(latitude: ISSPosition.coordinate.latitude, longitude: ISSPosition.coordinate.longitude)
             self?.mapView?.animate(toLocation: CLLocationCoordinate2D(latitude: ISSPosition.coordinate.latitude, longitude: ISSPosition.coordinate.longitude))
         }
-        
-        self.ISSViewModel?.onFetchPositionError =  {[weak self] (error:Error) -> () in
-            
-            let alert = UIAlertController(title: "Alert", message: error.localizedDescription ,preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self?.present(alert, animated: true, completion: nil)
-        }
     }
     
     func loadSettingsButton() {
