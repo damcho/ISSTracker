@@ -22,12 +22,12 @@ final class ISSTrackerViewModel {
     }
     
     func stopReceivingPositionUpdates() {
-        if self.intervalTimer != nil {
-            self.intervalTimer?.invalidate()
-        }
+        self.intervalTimer?.invalidate()
+        self.intervalTimer = nil
     }
     
     func startReceivingPositionUpdates() {
+        intervalTimer?.invalidate()
         intervalTimer = Timer.scheduledTimer(timeInterval: settingsObject.timeInterval, target: self, selector: #selector(updateISSPosition), userInfo: nil, repeats: true)
     }
     
