@@ -11,8 +11,6 @@
 		8B0E4002215D5596000F4BB0 /* ISSTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E4001215D5596000F4BB0 /* ISSTrackerViewController.swift */; };
 		8B0E4007215D5598000F4BB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4006215D5598000F4BB0 /* Assets.xcassets */; };
 		8B0E400A215D5598000F4BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E4008215D5598000F4BB0 /* LaunchScreen.storyboard */; };
-		8B13EB0A2D41963D00CEAE21 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13EB092D41963D00CEAE21 /* ActivityIndicatorView.swift */; };
-		8B13EB0C2D4199D000CEAE21 /* ActivityIndicatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13EB0B2D4199D000CEAE21 /* ActivityIndicatorViewModel.swift */; };
 		8B2E510D2CF9327800E134FD /* EventsLoggerDecoratorTests+ISSTrackerPositionLoaderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E510C2CF9327800E134FD /* EventsLoggerDecoratorTests+ISSTrackerPositionLoaderExtension.swift */; };
 		8B338D4E2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B338D4D2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift */; };
 		8B338D522CE3EB32000DF097 /* EventsLoggerDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B338D512CE3EB32000DF097 /* EventsLoggerDecorator.swift */; };
@@ -56,8 +54,6 @@
 		8B0E400B215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B0E4010215D5598000F4BB0 /* ISSTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ISSTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0E4016215D5598000F4BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B13EB092D41963D00CEAE21 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
-		8B13EB0B2D4199D000CEAE21 /* ActivityIndicatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewModel.swift; sourceTree = "<group>"; };
 		8B2E510C2CF9327800E134FD /* EventsLoggerDecoratorTests+ISSTrackerPositionLoaderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventsLoggerDecoratorTests+ISSTrackerPositionLoaderExtension.swift"; sourceTree = "<group>"; };
 		8B338D4D2CE3E6A2000DF097 /* EventsLoggerDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsLoggerDecoratorTests.swift; sourceTree = "<group>"; };
 		8B338D512CE3EB32000DF097 /* EventsLoggerDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsLoggerDecorator.swift; sourceTree = "<group>"; };
@@ -137,7 +133,6 @@
 		8B0E3FFE215D5596000F4BB0 /* ISSTracker */ = {
 			isa = PBXGroup;
 			children = (
-				8B13EB082D41962700CEAE21 /* Views */,
 				8BAE4DF42CE7C77B0085447B /* GoogleService-Info.plist */,
 				8B338D502CE3EB1D000DF097 /* Logging */,
 				8B8FDD89248CD5B00088D42E /* main */,
@@ -160,14 +155,6 @@
 				8B45BF922CFF94C700095686 /* EventsLoggingIntegrationTests.swift */,
 			);
 			path = ISSTrackerTests;
-			sourceTree = "<group>";
-		};
-		8B13EB082D41962700CEAE21 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				8B13EB092D41963D00CEAE21 /* ActivityIndicatorView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		8B338D502CE3EB1D000DF097 /* Logging */ = {
@@ -233,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				8B9A355E228C9DE800740C0F /* ISSTrackerViewModel.swift */,
-				8B13EB0B2D4199D000CEAE21 /* ActivityIndicatorViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -432,12 +418,10 @@
 			files = (
 				8B8FDD8B248CD61F0088D42E /* AppComposer.swift in Sources */,
 				8B8A90F82484C03600E50BD9 /* HTTPClientProtocol.swift in Sources */,
-				8B13EB0C2D4199D000CEAE21 /* ActivityIndicatorViewModel.swift in Sources */,
 				8B0E4002215D5596000F4BB0 /* ISSTrackerViewController.swift in Sources */,
 				8B8A90F42483CF6700E50BD9 /* RemoteISSTrackerPositionLoader.swift in Sources */,
 				8B8A90F62484BFC000E50BD9 /* AlamoFireHTTPClient.swift in Sources */,
 				8B0E4000215D5596000F4BB0 /* AppDelegate.swift in Sources */,
-				8B13EB0A2D41963D00CEAE21 /* ActivityIndicatorView.swift in Sources */,
 				8BC2AC4D2912B7C8007836E8 /* URLSessionHTTPClient.swift in Sources */,
 				8B771378228C8922003712A4 /* SettingsViewController.swift in Sources */,
 				8B9A355F228C9DE800740C0F /* ISSTrackerViewModel.swift in Sources */,
